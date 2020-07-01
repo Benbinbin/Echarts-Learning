@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.1 动态交互组件设置(1)</title>
+  <script src="js/echarts.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <article class="container">
+    <h1>
+      工具栏、区域选择组件
+    </h1>
+    <hr>
+
+    <h2>工具栏</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="toolbox" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var toolbox = echarts.init(document.getElementById('toolbox'));
+      // 指定图表的配置项和数据
+      option = {
+        title: {
+          text: '堆叠区域图'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
+        },
+        legend: {
+          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+        },
+        // 工具栏，默认在图表容器右上角
+        toolbox: {
+          right: 50,
+          // 选择需要加载（显示）的工具，内置五种工具，除了各个内置的工具按钮外，还可以自定义工具按钮
+          feature: {
+            // 将图表保存为图片
+            saveAsImage: {
+              // 如果 renderer 的类型在 初始化图表 时被设为 'canvas'（默认），则支持 'png'（默认）和 'jpeg'；
+              type: 'png'
+              // 如果 renderer 的类型在 初始化图表 时被设为 'svg'，则 type 只支持 'svg'（'svg' 格式的图片从 v4.8.0 开始支持）。
+            },
+            // 还原设置
+            restore: {},
+            // 展示图表具体的来源数据
+            dataView: {},
+            // 缩放视图
+            dataZoom: {},
+            // 动态类型切换基本图表类型
+            magicType: {
+              type: ['line', 'bar', 'stack', 'tiled']   // 列出可选择切换的类型，包括'line'（切换为折线图）, 'bar'（切换为柱状图）, 'stack'（切换为堆叠模式）, 'tiled'（切换为平铺模式）
+            }
+
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '邮件营销',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: '联盟广告',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: '视频广告',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [150, 232, 201, 154, 190, 330, 410]
+          },
+          {
+            name: '直接访问',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [320, 332, 301, 334, 390, 330, 320]
+          },
+          {
+            name: '搜索引擎',
+            type: 'line',
+            stack: '总量',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            areaStyle: {},
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      toolbox.setOption(option);
+    </script>
+
+    <h2>区域选择组件</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="brush" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var brush = echarts.init(document.getElementById('brush'));
+      // 指定图表的配置项和数据
+      var dataAll = [
+        [
+          [10.0, 8.04],
+          [8.0, 6.95],
+          [13.0, 7.58],
+          [9.0, 8.81],
+          [11.0, 8.33],
+          [14.0, 9.96],
+          [6.0, 7.24],
+          [4.0, 4.26],
+          [12.0, 10.84],
+          [7.0, 4.82],
+          [5.0, 5.68]
+        ],
+        [
+          [10.0, 9.14],
+          [8.0, 8.14],
+          [13.0, 8.74],
+          [9.0, 8.77],
+          [11.0, 9.26],
+          [14.0, 8.10],
+          [6.0, 6.13],
+          [4.0, 3.10],
+          [12.0, 9.13],
+          [7.0, 7.26],
+          [5.0, 4.74]
+        ],
+        [
+          [10.0, 7.46],
+          [8.0, 6.77],
+          [13.0, 12.74],
+          [9.0, 7.11],
+          [11.0, 7.81],
+          [14.0, 8.84],
+          [6.0, 6.08],
+          [4.0, 5.39],
+          [12.0, 8.15],
+          [7.0, 6.42],
+          [5.0, 5.73]
+        ],
+        [
+          [8.0, 6.58],
+          [8.0, 5.76],
+          [8.0, 7.71],
+          [8.0, 8.84],
+          [8.0, 8.47],
+          [8.0, 7.04],
+          [8.0, 5.25],
+          [19.0, 12.50],
+          [8.0, 5.56],
+          [8.0, 7.91],
+          [8.0, 6.89]
+        ]
+      ];
+
+      var markLineOpt = {
+        animation: false,
+        label: {
+          formatter: 'y = 0.5 * x + 3',
+          align: 'right'
+        },
+        lineStyle: {
+          type: 'solid'
+        },
+        tooltip: {
+          formatter: 'y = 0.5 * x + 3'
+        },
+        data: [[{
+          coord: [0, 3],
+          symbol: 'none'
+        }, {
+          coord: [20, 13],
+          symbol: 'none'
+        }]]
+      };
+
+      option = {
+        title: {
+          text: 'Anscombe\'s quartet',
+          left: 'center',
+          top: 0
+        },
+        grid: [
+          { x: '7%', y: '7%', width: '38%', height: '38%' },
+          { x2: '7%', y: '7%', width: '38%', height: '38%' },
+          { x: '7%', y2: '7%', width: '38%', height: '38%' },
+          { x2: '7%', y2: '7%', width: '38%', height: '38%' }
+        ],
+        tooltip: {
+          formatter: 'Group {a}: ({c})'
+        },
+        xAxis: [
+          { gridIndex: 0, min: 0, max: 20 },
+          { gridIndex: 1, min: 0, max: 20 },
+          { gridIndex: 2, min: 0, max: 20 },
+          { gridIndex: 3, min: 0, max: 20 }
+        ],
+        yAxis: [
+          { gridIndex: 0, min: 0, max: 15 },
+          { gridIndex: 1, min: 0, max: 15 },
+          { gridIndex: 2, min: 0, max: 15 },
+          { gridIndex: 3, min: 0, max: 15 }
+        ],
+        toolbox: {
+          right: 80
+        },
+        // 区域选择组件，用户可以选择图中一部分数据，从而便于向用户展示被选中数据，或者他们的一些统计计算结果
+        // 目前 brush 组件支持的图表类型：scatter、bar、candlestick（parallel 本身自带刷选功能，但并非由 brush 组件来提供）。点击 toolbox 中的按钮，能够进行『区域选择』、『清除选择』等操作。
+        brush: {
+          // 在 toolbox 显示可启用的选择工具，brush 相关的 toolbox 按钮有：
+          // 'rect'：开启矩形选框选择功能。
+          // 'polygon'：开启任意形状选框选择功能。
+          // 'lineX'：开启横向选择功能。
+          // 'lineY'：开启纵向选择功能。
+          // 'keep'：切换『单选』和『多选』模式。后者可支持同时画多个选框。前者支持单击清除所有选框。
+          // 'clear'：清空所有选框。
+          toolbox: ['rect', 'polygon', 'keep', 'clear'],
+          // 指定哪些 xAxisIndex 可以被刷选，只允许 xAxisIndex 索引为 0 和 1 的图表被框选
+          xAxisIndex: [0, 1],
+          // 已经选好的选框是否可以被调整形状或平移
+          transformable: true,
+        },
+        series: [
+          {
+            name: 'I',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            data: dataAll[0],
+            markLine: markLineOpt
+          },
+          {
+            name: 'II',
+            type: 'scatter',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data: dataAll[1],
+            markLine: markLineOpt
+          },
+          {
+            name: 'III',
+            type: 'scatter',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            data: dataAll[2],
+            markLine: markLineOpt
+          },
+          {
+            name: 'IV',
+            type: 'scatter',
+            xAxisIndex: 3,
+            yAxisIndex: 3,
+            data: dataAll[3],
+            markLine: markLineOpt
+          }
+        ]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      brush.setOption(option);
+    </script>
+  </article>
+</body>
+
+</html>

@@ -10,284 +10,293 @@
 </head>
 
 <body>
-  <h1>极坐标图</h1>
-  <hr>
-  <h2>极坐标下的（堆叠）条形图</h2>
-  <div id="polarChartLine" style="height: 800px"></div>
+  <aside>
+    <div class="top">
+      <a href="#" target="_self">&lt; top</a>
+    </div>
+  </aside>
 
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var polarChartLine = echarts.init(document.getElementById('polarChartLine'));
-    // 指定图表的配置项和数据
-    // 数据源：体验课资料_双十一淘宝美妆数据.xlsx
-    // 数据格式在线转换工具：https://echarts.apache.org/zh/spreadsheet.html
-    option = {
-      aria: {
-        show: true
-      },
-      title: {
-        text: '2016年双十一淘宝美妆数据',
-        subtext: '各品牌每日总销量'
-      },
-      legend: {
-        show: true,
-      },
-      angleAxis: {
-      },
-      // 相当于以径向轴 radiusAxis 作为 xAxis
-      radiusAxis: {
-        type: 'category',
-        data: ['2016/11/5', '2016/11/6', '2016/11/7', '2016/11/8', '2016/11/9', '2016/11/10', '2016/11/11', '2016/11/12', '2016/11/13', '2016/11/14'],
-        z: 2,
-      },
-      polar: {
-      },
-      series: [{
-        type: 'bar',
-        data: [1437886, 1439717, 1446001, 1438328, 1448884, 1455025, 1750778, 1488526, 1440908, 1652153],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '佰草集',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [21523, 21859, 22089, 22336, 22528, 10784, 5872, 18134, 18198, 18305],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '娇兰',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [469012, 473758, 458931, 463644, 468765, 483199, 275733, 4263, 4858, 4843],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '兰蔻',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [3972389, 3979540, 3643503, 3993028, 4000143, 4045684, 3913823, 3638057, 3615817, 3619718],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '妮维雅',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [2851001, 3211945, 3128074, 3290104, 3766659, 3907779, 3305700, 3525720, 3517852, 3492963],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '欧莱雅',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [468769, 464134, 434510, 447210, 466119, 478367, 327106, 307731, 285389, 271637],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '欧珀莱',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [7857652, 7856894, 7710323, 7711768, 7713348, 5906458, 3952281, 5527695, 5394190, 5832338],
-        coordinateSystem: 'polar',   // 坐标系统使用极坐标系
-        name: '相宜本草',
-        stack: '每日总销量'   // 堆叠系列
-      }],
-      // 交互设置，鼠标悬停弹出的提示框
-      tooltip: {
-        show: true,
-        formatter: '{a}：{c}'
-      },
-    };
-    polarChartLine.setOption(option, true);
-  </script>
+  <article class="container">
+    <h1>极坐标图</h1>
+    <hr>
+    <h2>极坐标下的（堆叠）条形图</h2>
+    <div id="polarChartLine" style="height: 800px"></div>
 
-  <h2>极坐标下的（堆叠）柱状图</h2>
-  <div id="polarChartBar" style="height: 800px"></div>
-
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var polarChartBar = echarts.init(document.getElementById('polarChartBar'));
-    // 指定图表的配置项和数据
-    // 数据源：体验课资料_双十一淘宝美妆数据.xlsx
-    // 数据格式在线转换工具：https://echarts.apache.org/zh/spreadsheet.html
-    option = {
-      aria: {
-        show: true
-      },
-      title: {
-        text: '2016年双十一淘宝美妆数据',
-        subtext: '各品牌每日总销量'
-      },
-      legend: {
-        show: true,
-      },
-      radiusAxis: {
-        z: 2,
-      },
-      // 相当于以角度轴 angleAxis 作为 xAxis
-      angleAxis: {
-        type: 'category',
-        data: ['2016/11/5', '2016/11/6', '2016/11/7', '2016/11/8', '2016/11/9', '2016/11/10', '2016/11/11', '2016/11/12', '2016/11/13', '2016/11/14'],
-
-      },
-      polar: {
-      },
-      series: [{
-        type: 'bar',
-        data: [1437886, 1439717, 1446001, 1438328, 1448884, 1455025, 1750778, 1488526, 1440908, 1652153],
-        coordinateSystem: 'polar',
-        name: '佰草集',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [21523, 21859, 22089, 22336, 22528, 10784, 5872, 18134, 18198, 18305],
-        coordinateSystem: 'polar',
-        name: '娇兰',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [469012, 473758, 458931, 463644, 468765, 483199, 275733, 4263, 4858, 4843],
-        coordinateSystem: 'polar',
-        name: '兰蔻',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [3972389, 3979540, 3643503, 3993028, 4000143, 4045684, 3913823, 3638057, 3615817, 3619718],
-        coordinateSystem: 'polar',
-        name: '妮维雅',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [2851001, 3211945, 3128074, 3290104, 3766659, 3907779, 3305700, 3525720, 3517852, 3492963],
-        coordinateSystem: 'polar',
-        name: '欧莱雅',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [468769, 464134, 434510, 447210, 466119, 478367, 327106, 307731, 285389, 271637],
-        coordinateSystem: 'polar',
-        name: '欧珀莱',
-        stack: '每日总销量'   // 堆叠系列
-      }, {
-        type: 'bar',
-        data: [7857652, 7856894, 7710323, 7711768, 7713348, 5906458, 3952281, 5527695, 5394190, 5832338],
-        coordinateSystem: 'polar',
-        name: '相宜本草',
-        stack: '每日总销量'   // 堆叠系列
-      }],
-      // 交互设置，鼠标悬停弹出的提示框
-      tooltip: {
-        show: true,
-        formatter: '{a}：{c}'
-      },
-    };
-    polarChartBar.setOption(option, true);
-  </script>
-
-  <h2>极坐标下的（堆叠）瀑布图</h2>
-  <div id="polarChartWaterfall" style="height: 800px"></div>
-
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var polarChartWaterfall = echarts.init(document.getElementById('polarChartWaterfall'));
-    // 数据
-    var data = [
-      [5000, 10000, 6785.71],
-      [4000, 10000, 6825],
-      [3000, 6500, 4463.33],
-      [2500, 5600, 3793.83],
-      [2000, 4000, 3060],
-      [2000, 4000, 3222.33],
-      [2500, 4000, 3133.33],
-      [1800, 4000, 3100],
-      [2000, 3500, 2750],
-      [2000, 3000, 2500],
-      [1800, 3000, 2433.33],
-      [2000, 2700, 2375],
-      [1500, 2800, 2150],
-      [1500, 2300, 2100],
-      [1600, 3500, 2057.14],
-      [1500, 2600, 2037.5],
-      [1500, 2417.54, 1905.85],
-      [1500, 2000, 1775],
-      [1500, 1800, 1650]
-    ];
-    var cities = ['北京', '上海', '深圳', '广州', '苏州', '杭州', '南京', '福州', '青岛', '济南', '长春', '大连', '温州', '郑州', '武汉', '成都', '东莞', '沈阳', '烟台'];
-    var barHeight = 50;   // 均值标线粗细
-    // 指定图表的配置项和数据
-    option = {
-      aria: {
-        show: true
-      },
-      title: {
-        text: '在中国租个房子有多贵？',
-        subtext: '市中心一室月租费（数据来源：https://www.numbeo.com）'
-      },
-      legend: {
-        show: true,
-      },
-      // 相当于以角度轴 angleAxis 作为 xAxis
-      angleAxis: {
-        type: 'category',
-        data: cities
-      },
-
-      radiusAxis: {
-      },
-      polar: {
-      },
-      series: [
-        // 房价范围系列（基于堆叠图构造）
-        // 瀑布图的「基础值」
-        {
-        type: 'bar',
-        itemStyle: {
-          color: 'transparent'
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var polarChartLine = echarts.init(document.getElementById('polarChartLine'));
+      // 指定图表的配置项和数据
+      // 数据源：体验课资料_双十一淘宝美妆数据.xlsx
+      // 数据格式在线转换工具：https://echarts.apache.org/zh/spreadsheet.html
+      option = {
+        aria: {
+          show: true
         },
-        data: data.map(function (d) {
-          return d[0];
-        }),
-        coordinateSystem: 'polar',
-        stack: '最大最小值',
-        silent: true
-      }, {
-        type: 'bar',
-        data: data.map(function (d) {
-          return d[1] - d[0];
-        }),
-        coordinateSystem: 'polar',
-        name: '价格范围',
-        stack: '最大最小值'
-      },
-      // 房价均值系列（基于堆叠图构造）
-      // 瀑布图的「基础值」
-      {
-        type: 'bar',
-        itemStyle: {
-          color: 'transparent'
+        title: {
+          text: '2016年双十一淘宝美妆数据',
+          subtext: '各品牌每日总销量'
         },
-        data: data.map(function (d) {
-          return d[2] - barHeight;
-        }),
-        coordinateSystem: 'polar',
-        stack: '均值',
-        silent: true,
-        z: 10
-      }, {
-        type: 'bar',
-        data: data.map(function (d) {
-          return barHeight * 2;
-        }),
-        coordinateSystem: 'polar',
-        name: '均值',
-        stack: '均值',
-        barGap: '-100%',
-        z: 10
-      }],
-      tooltip: {
-        show: true,
-        formatter: function (params) {
-          var id = params.dataIndex;
-          return cities[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+        legend: {
+          show: true,
+        },
+        angleAxis: {
+        },
+        // 相当于以径向轴 radiusAxis 作为 xAxis
+        radiusAxis: {
+          type: 'category',
+          data: ['2016/11/5', '2016/11/6', '2016/11/7', '2016/11/8', '2016/11/9', '2016/11/10', '2016/11/11', '2016/11/12', '2016/11/13', '2016/11/14'],
+          z: 2,
+        },
+        polar: {
+        },
+        series: [{
+          type: 'bar',
+          data: [1437886, 1439717, 1446001, 1438328, 1448884, 1455025, 1750778, 1488526, 1440908, 1652153],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '佰草集',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [21523, 21859, 22089, 22336, 22528, 10784, 5872, 18134, 18198, 18305],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '娇兰',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [469012, 473758, 458931, 463644, 468765, 483199, 275733, 4263, 4858, 4843],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '兰蔻',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [3972389, 3979540, 3643503, 3993028, 4000143, 4045684, 3913823, 3638057, 3615817, 3619718],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '妮维雅',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [2851001, 3211945, 3128074, 3290104, 3766659, 3907779, 3305700, 3525720, 3517852, 3492963],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '欧莱雅',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [468769, 464134, 434510, 447210, 466119, 478367, 327106, 307731, 285389, 271637],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '欧珀莱',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [7857652, 7856894, 7710323, 7711768, 7713348, 5906458, 3952281, 5527695, 5394190, 5832338],
+          coordinateSystem: 'polar',   // 坐标系统使用极坐标系
+          name: '相宜本草',
+          stack: '每日总销量'   // 堆叠系列
+        }],
+        // 交互设置，鼠标悬停弹出的提示框
+        tooltip: {
+          show: true,
+          formatter: '{a}：{c}'
+        },
+      };
+      polarChartLine.setOption(option, true);
+    </script>
+
+    <h2>极坐标下的（堆叠）柱状图</h2>
+    <div id="polarChartBar" style="height: 800px"></div>
+
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var polarChartBar = echarts.init(document.getElementById('polarChartBar'));
+      // 指定图表的配置项和数据
+      // 数据源：体验课资料_双十一淘宝美妆数据.xlsx
+      // 数据格式在线转换工具：https://echarts.apache.org/zh/spreadsheet.html
+      option = {
+        aria: {
+          show: true
+        },
+        title: {
+          text: '2016年双十一淘宝美妆数据',
+          subtext: '各品牌每日总销量'
+        },
+        legend: {
+          show: true,
+        },
+        radiusAxis: {
+          z: 2,
+        },
+        // 相当于以角度轴 angleAxis 作为 xAxis
+        angleAxis: {
+          type: 'category',
+          data: ['2016/11/5', '2016/11/6', '2016/11/7', '2016/11/8', '2016/11/9', '2016/11/10', '2016/11/11', '2016/11/12', '2016/11/13', '2016/11/14'],
+
+        },
+        polar: {
+        },
+        series: [{
+          type: 'bar',
+          data: [1437886, 1439717, 1446001, 1438328, 1448884, 1455025, 1750778, 1488526, 1440908, 1652153],
+          coordinateSystem: 'polar',
+          name: '佰草集',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [21523, 21859, 22089, 22336, 22528, 10784, 5872, 18134, 18198, 18305],
+          coordinateSystem: 'polar',
+          name: '娇兰',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [469012, 473758, 458931, 463644, 468765, 483199, 275733, 4263, 4858, 4843],
+          coordinateSystem: 'polar',
+          name: '兰蔻',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [3972389, 3979540, 3643503, 3993028, 4000143, 4045684, 3913823, 3638057, 3615817, 3619718],
+          coordinateSystem: 'polar',
+          name: '妮维雅',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [2851001, 3211945, 3128074, 3290104, 3766659, 3907779, 3305700, 3525720, 3517852, 3492963],
+          coordinateSystem: 'polar',
+          name: '欧莱雅',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [468769, 464134, 434510, 447210, 466119, 478367, 327106, 307731, 285389, 271637],
+          coordinateSystem: 'polar',
+          name: '欧珀莱',
+          stack: '每日总销量'   // 堆叠系列
+        }, {
+          type: 'bar',
+          data: [7857652, 7856894, 7710323, 7711768, 7713348, 5906458, 3952281, 5527695, 5394190, 5832338],
+          coordinateSystem: 'polar',
+          name: '相宜本草',
+          stack: '每日总销量'   // 堆叠系列
+        }],
+        // 交互设置，鼠标悬停弹出的提示框
+        tooltip: {
+          show: true,
+          formatter: '{a}：{c}'
+        },
+      };
+      polarChartBar.setOption(option, true);
+    </script>
+
+    <h2>极坐标下的（堆叠）瀑布图</h2>
+    <div id="polarChartWaterfall" style="height: 800px"></div>
+
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var polarChartWaterfall = echarts.init(document.getElementById('polarChartWaterfall'));
+      // 数据
+      var data = [
+        [5000, 10000, 6785.71],
+        [4000, 10000, 6825],
+        [3000, 6500, 4463.33],
+        [2500, 5600, 3793.83],
+        [2000, 4000, 3060],
+        [2000, 4000, 3222.33],
+        [2500, 4000, 3133.33],
+        [1800, 4000, 3100],
+        [2000, 3500, 2750],
+        [2000, 3000, 2500],
+        [1800, 3000, 2433.33],
+        [2000, 2700, 2375],
+        [1500, 2800, 2150],
+        [1500, 2300, 2100],
+        [1600, 3500, 2057.14],
+        [1500, 2600, 2037.5],
+        [1500, 2417.54, 1905.85],
+        [1500, 2000, 1775],
+        [1500, 1800, 1650]
+      ];
+      var cities = ['北京', '上海', '深圳', '广州', '苏州', '杭州', '南京', '福州', '青岛', '济南', '长春', '大连', '温州', '郑州', '武汉', '成都', '东莞', '沈阳', '烟台'];
+      var barHeight = 50;   // 均值标线粗细
+      // 指定图表的配置项和数据
+      option = {
+        aria: {
+          show: true
+        },
+        title: {
+          text: '在中国租个房子有多贵？',
+          subtext: '市中心一室月租费（数据来源：https://www.numbeo.com）'
+        },
+        legend: {
+          show: true,
+        },
+        // 相当于以角度轴 angleAxis 作为 xAxis
+        angleAxis: {
+          type: 'category',
+          data: cities
+        },
+
+        radiusAxis: {
+        },
+        polar: {
+        },
+        series: [
+          // 房价范围系列（基于堆叠图构造）
+          // 瀑布图的「基础值」
+          {
+            type: 'bar',
+            itemStyle: {
+              color: 'transparent'
+            },
+            data: data.map(function (d) {
+              return d[0];
+            }),
+            coordinateSystem: 'polar',
+            stack: '最大最小值',
+            silent: true
+          }, {
+            type: 'bar',
+            data: data.map(function (d) {
+              return d[1] - d[0];
+            }),
+            coordinateSystem: 'polar',
+            name: '价格范围',
+            stack: '最大最小值'
+          },
+          // 房价均值系列（基于堆叠图构造）
+          // 瀑布图的「基础值」
+          {
+            type: 'bar',
+            itemStyle: {
+              color: 'transparent'
+            },
+            data: data.map(function (d) {
+              return d[2] - barHeight;
+            }),
+            coordinateSystem: 'polar',
+            stack: '均值',
+            silent: true,
+            z: 10
+          }, {
+            type: 'bar',
+            data: data.map(function (d) {
+              return barHeight * 2;
+            }),
+            coordinateSystem: 'polar',
+            name: '均值',
+            stack: '均值',
+            barGap: '-100%',
+            z: 10
+          }],
+        tooltip: {
+          show: true,
+          formatter: function (params) {
+            var id = params.dataIndex;
+            return cities[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+          }
         }
-      }
-    };
+      };
 
-    polarChartWaterfall.setOption(option, true);
-  </script>
+      polarChartWaterfall.setOption(option, true);
+    </script>
+  </article>
+
 </body>
 
 </html>

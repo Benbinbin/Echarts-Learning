@@ -1,4 +1,8 @@
-body {
+html {
+  scroll-behavior: smooth;
+}
+
+article {
   max-width: 980px;
   margin: 0 auto;
 }
@@ -11,4 +15,23 @@ h1 {
 h2 {
   text-align: center;
   margin: 30px;
+}
+
+aside .top {
+  position: fixed;
+  bottom: 5%;
+  right: 0.5rem;
+}
+
+aside .top a {
+  font-size: 1rem;
+  writing-mode: vertical-rl;
+  text-decoration: none;
+  color: gray;
+  text-align: center;
+}
+
+article ul li {
+  list-style-type: circle;
+  text-indent: 2em
 }

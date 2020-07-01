@@ -11,363 +11,372 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="container">
-  <h1>
-    样式设置
-  </h1>
-  <hr>
-  <h2>常见图表元素样式属性</h2>
-  <div class="table-responsive">
-    <table class="table table-sm table-hover">
-      <thead>
-        <tr>
-          <th scope="col">图表元素</th>
-          <th scope="col">文字属性</td>
-          <th scope="col">背景属性</td>
-          <th scope="col">位置/组件宽度属性</td>
-          <th scope="col">轴线属性</td>
-          <th scope="col">标注属性</td>
-          <th scope="col">刻度属性</td>
-          <th scope="col">轴线辅助线属性</td>
-          <th scope="col">轴线辅助面属性</td>
-          <th scope="col">指示器属性</td>
-          <th scope="col">索引问题</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">标题<br><code>title</code></th>
-          <td>
-            <ul>
-              <li><code>textStyle</code></li>
-              <li><code>subtextStyle</code></li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><code>backgroundColor</code></li>
-              <li><code>borderColor</code></li>
-              <li>…</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><code>top</code>/<code>bottom</code></li>
-              <li><code>left</code>/<code>right</code></li>
-              <li><code>width</code>/<code>height</code></li>
-            </ul>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            坐标轴<br>
-            <code>xAxis</code>/<code>yAxis</code><br>
-            <code>angleAxis</code><br>
-            <code>radiusAxis</code><br>
-            <code>radar</code><br>
-            <code>calendar</code>
-          </th>
-          <td><code>nameTextStyle</code></td>
-          <td></td>
-          <td></td>
-          <td><code>axisLine</code></td>
-          <td><code>axisLabel</code></td>
-          <td><code>axisTick</code></td>
-          <td><code>splitLine</code></td>
-          <td><code>splitArea</code></td>
-          <td>(<code>option</code> 对象的属性）<code>axisPointer</code></td>
-          <td><code>gridIndex</code></td>
-        </tr>
-        <tr>
-          <th scope="row">
-            图框<br>
-            <code>grid</code>
-          </th>
-          <td></td>
-          <td>
-            <ul>
-              <li><code>backgroundColor</code></li>
-              <li><code>borderColor</code></li>
-              <li>…</li>
-            </ul>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<body>
+  <aside>
+    <div class="top">
+      <a href="#" target="_self">&lt; top</a>
+    </div>
+  </aside>
 
-  <div class="table-responsive">
-    <table class="table table-sm table-hover">
-      <thead>
-        <tr>
-          <th scope="col">图表元素</th>
-          <th scope="col">标注属性</th>
-          <th scope="col">数据样式属性</th>
-          <th scope="col">数据标注属性</th>
-          <th scope="col">索引问题</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">数据列表<br>
-            <code>series</code>
-          </th>
-          <td><code>label</code></td>
-          <td>
-            <code>itemStyle</code><br>
-            <code>lineStyle</code><br>
-            <code>areaStyle</code></td>
-          <td>
-            <code>markPoint</code><br>
-            <code>markLine</code><br>
-            <code>markArea</code></td>
-          <td>
-            <code>xAxisIndex</code><br>
-            <code>polarIndex</code><br>
-            <code>…</code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <article class="container">
+    <h1>
+      样式设置
+    </h1>
+    <hr>
+    <h2>常见图表元素样式属性</h2>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col">图表元素</th>
+            <th scope="col">文字属性</td>
+            <th scope="col">背景属性</td>
+            <th scope="col">位置/组件宽度属性</td>
+            <th scope="col">轴线属性</td>
+            <th scope="col">标注属性</td>
+            <th scope="col">刻度属性</td>
+            <th scope="col">轴线辅助线属性</td>
+            <th scope="col">轴线辅助面属性</td>
+            <th scope="col">指示器属性</td>
+            <th scope="col">索引问题</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">标题<br><code>title</code></th>
+            <td>
+              <ul>
+                <li><code>textStyle</code></li>
+                <li><code>subtextStyle</code></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li><code>backgroundColor</code></li>
+                <li><code>borderColor</code></li>
+                <li>…</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li><code>top</code>/<code>bottom</code></li>
+                <li><code>left</code>/<code>right</code></li>
+                <li><code>width</code>/<code>height</code></li>
+              </ul>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">
+              坐标轴<br>
+              <code>xAxis</code>/<code>yAxis</code><br>
+              <code>angleAxis</code><br>
+              <code>radiusAxis</code><br>
+              <code>radar</code><br>
+              <code>calendar</code>
+            </th>
+            <td><code>nameTextStyle</code></td>
+            <td></td>
+            <td></td>
+            <td><code>axisLine</code></td>
+            <td><code>axisLabel</code></td>
+            <td><code>axisTick</code></td>
+            <td><code>splitLine</code></td>
+            <td><code>splitArea</code></td>
+            <td>(<code>option</code> 对象的属性）<code>axisPointer</code></td>
+            <td><code>gridIndex</code></td>
+          </tr>
+          <tr>
+            <th scope="row">
+              图框<br>
+              <code>grid</code>
+            </th>
+            <td></td>
+            <td>
+              <ul>
+                <li><code>backgroundColor</code></li>
+                <li><code>borderColor</code></li>
+                <li>…</li>
+              </ul>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <h2>坐标轴指示器</h2>
-  <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
-  <div id="lineChart" style="height:600px"></div>
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var lineChart = echarts.init(document.getElementById('lineChart'));
-    // 指定图表的配置项和数据
-    option = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      // 坐标轴指示器，它是指示坐标轴当前刻度的工具
-      axisPointer: {
-        show: true,
-        type: 'shadow',   // 指示器样式，默认为 'line'
-      },
-      series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line'
-      }]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    lineChart.setOption(option);
-  </script>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col">图表元素</th>
+            <th scope="col">标注属性</th>
+            <th scope="col">数据样式属性</th>
+            <th scope="col">数据标注属性</th>
+            <th scope="col">索引问题</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">数据列表<br>
+              <code>series</code>
+            </th>
+            <td><code>label</code></td>
+            <td>
+              <code>itemStyle</code><br>
+              <code>lineStyle</code><br>
+              <code>areaStyle</code></td>
+            <td>
+              <code>markPoint</code><br>
+              <code>markLine</code><br>
+              <code>markArea</code></td>
+            <td>
+              <code>xAxisIndex</code><br>
+              <code>polarIndex</code><br>
+              <code>…</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <h2>高亮样式设置</h2>
-  <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
-  <div id="highlightChart" style="height:600px"></div>
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var highlightChart = echarts.init(document.getElementById('highlightChart'));
-    // 指定图表的配置项和数据
-    option = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar',
-        // 高亮标签样式和图形样式设置
-        emphasis: {
-          // 高亮的标签样式设置
-          label: {
-            show: true,
-            fontSize: 20
-          },
-          // 高亮的图形样式设置
-          itemStyle: {
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-            shadowBlur: 10
+    <h2>坐标轴指示器</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="lineChart" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var lineChart = echarts.init(document.getElementById('lineChart'));
+      // 指定图表的配置项和数据
+      option = {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        // 坐标轴指示器，它是指示坐标轴当前刻度的工具
+        axisPointer: {
+          show: true,
+          type: 'shadow',   // 指示器样式，默认为 'line'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line'
+        }]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      lineChart.setOption(option);
+    </script>
+
+    <h2>高亮样式设置</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="highlightChart" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var highlightChart = echarts.init(document.getElementById('highlightChart'));
+      // 指定图表的配置项和数据
+      option = {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar',
+          // 高亮标签样式和图形样式设置
+          emphasis: {
+            // 高亮的标签样式设置
+            label: {
+              show: true,
+              fontSize: 20
+            },
+            // 高亮的图形样式设置
+            itemStyle: {
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
+              shadowBlur: 10
+            }
           }
-        }
-      }]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    highlightChart.setOption(option);
-  </script>
+        }]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      highlightChart.setOption(option);
+    </script>
 
 
-  <h2>多系列图表的索引</h2>
-  <p>在多系列图表中，绘图网格 <code>grid</code> 设置每个图表的定位参数。</p>
-  <p>每个图表的坐标轴，如 <code>xAxis</code>，对应一个网格索引 <code>gridIndex</code>，每个图表的数据 <code>series</code> 对应一个坐标轴索引，如
-    <code>xAxisIndex</code>。</p>
+    <h2>多系列图表的索引</h2>
+    <p>在多系列图表中，绘图网格 <code>grid</code> 设置每个图表的定位参数。</p>
+    <p>每个图表的坐标轴，如 <code>xAxis</code>，对应一个网格索引 <code>gridIndex</code>，每个图表的数据 <code>series</code> 对应一个坐标轴索引，如
+      <code>xAxisIndex</code>。</p>
 
-  <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
-  <div id="seriesChart" style="height:600px"></div>
-  <script>
-    // 基于准备好的 DOM 初始化 echarts 实例
-    var seriesChart = echarts.init(document.getElementById('seriesChart'));
-    // 指定图表的配置项和数据
-    var dataAll = [
-      [
-        [10.0, 8.04],
-        [8.0, 6.95],
-        [13.0, 7.58],
-        [9.0, 8.81],
-        [11.0, 8.33],
-        [14.0, 9.96],
-        [6.0, 7.24],
-        [4.0, 4.26],
-        [12.0, 10.84],
-        [7.0, 4.82],
-        [5.0, 5.68]
-      ],
-      [
-        [10.0, 9.14],
-        [8.0, 8.14],
-        [13.0, 8.74],
-        [9.0, 8.77],
-        [11.0, 9.26],
-        [14.0, 8.10],
-        [6.0, 6.13],
-        [4.0, 3.10],
-        [12.0, 9.13],
-        [7.0, 7.26],
-        [5.0, 4.74]
-      ],
-      [
-        [10.0, 7.46],
-        [8.0, 6.77],
-        [13.0, 12.74],
-        [9.0, 7.11],
-        [11.0, 7.81],
-        [14.0, 8.84],
-        [6.0, 6.08],
-        [4.0, 5.39],
-        [12.0, 8.15],
-        [7.0, 6.42],
-        [5.0, 5.73]
-      ],
-      [
-        [8.0, 6.58],
-        [8.0, 5.76],
-        [8.0, 7.71],
-        [8.0, 8.84],
-        [8.0, 8.47],
-        [8.0, 7.04],
-        [8.0, 5.25],
-        [19.0, 12.50],
-        [8.0, 5.56],
-        [8.0, 7.91],
-        [8.0, 6.89]
-      ]
-    ];
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="seriesChart" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var seriesChart = echarts.init(document.getElementById('seriesChart'));
+      // 指定图表的配置项和数据
+      var dataAll = [
+        [
+          [10.0, 8.04],
+          [8.0, 6.95],
+          [13.0, 7.58],
+          [9.0, 8.81],
+          [11.0, 8.33],
+          [14.0, 9.96],
+          [6.0, 7.24],
+          [4.0, 4.26],
+          [12.0, 10.84],
+          [7.0, 4.82],
+          [5.0, 5.68]
+        ],
+        [
+          [10.0, 9.14],
+          [8.0, 8.14],
+          [13.0, 8.74],
+          [9.0, 8.77],
+          [11.0, 9.26],
+          [14.0, 8.10],
+          [6.0, 6.13],
+          [4.0, 3.10],
+          [12.0, 9.13],
+          [7.0, 7.26],
+          [5.0, 4.74]
+        ],
+        [
+          [10.0, 7.46],
+          [8.0, 6.77],
+          [13.0, 12.74],
+          [9.0, 7.11],
+          [11.0, 7.81],
+          [14.0, 8.84],
+          [6.0, 6.08],
+          [4.0, 5.39],
+          [12.0, 8.15],
+          [7.0, 6.42],
+          [5.0, 5.73]
+        ],
+        [
+          [8.0, 6.58],
+          [8.0, 5.76],
+          [8.0, 7.71],
+          [8.0, 8.84],
+          [8.0, 8.47],
+          [8.0, 7.04],
+          [8.0, 5.25],
+          [19.0, 12.50],
+          [8.0, 5.56],
+          [8.0, 7.91],
+          [8.0, 6.89]
+        ]
+      ];
 
-    var markLineOpt = {
-      animation: false,
-      label: {
-        formatter: 'y = 0.5 * x + 3',
-        align: 'right'
-      },
-      lineStyle: {
-        type: 'solid'
-      },
-      tooltip: {
-        formatter: 'y = 0.5 * x + 3'
-      },
-      data: [[{
-        coord: [0, 3],
-        symbol: 'none'
-      }, {
-        coord: [20, 13],
-        symbol: 'none'
-      }]]
-    };
-
-    option = {
-      title: {
-        text: 'Anscombe\'s quartet',
-        left: 'center',
-        top: 0
-      },
-      // 多个绘图网格参数，分别设置不同图表的定位和属性
-      grid: [
-        { x: '7%', y: '7%', width: '38%', height: '38%' },
-        { x2: '7%', y: '7%', width: '38%', height: '38%' },
-        { x: '7%', y2: '7%', width: '38%', height: '38%' },
-        { x2: '7%', y2: '7%', width: '38%', height: '38%' }
-      ],
-      tooltip: {
-        formatter: 'Group {a}: ({c})'
-      },
-      // 多个坐标轴，对应相应的网格索引 gridIndex
-      xAxis: [
-        { gridIndex: 0, min: 0, max: 20 },
-        { gridIndex: 1, min: 0, max: 20 },
-        { gridIndex: 2, min: 0, max: 20 },
-        { gridIndex: 3, min: 0, max: 20 }
-      ],
-      yAxis: [
-        { gridIndex: 0, min: 0, max: 15 },
-        { gridIndex: 1, min: 0, max: 15 },
-        { gridIndex: 2, min: 0, max: 15 },
-        { gridIndex: 3, min: 0, max: 15 }
-      ],
-      // 多个系列列表，对应相应的坐标轴索引
-      series: [
-        {
-          name: 'I',
-          type: 'scatter',
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          data: dataAll[0],
-          markLine: markLineOpt
+      var markLineOpt = {
+        animation: false,
+        label: {
+          formatter: 'y = 0.5 * x + 3',
+          align: 'right'
         },
-        {
-          name: 'II',
-          type: 'scatter',
-          xAxisIndex: 1,
-          yAxisIndex: 1,
-          data: dataAll[1],
-          markLine: markLineOpt
+        lineStyle: {
+          type: 'solid'
         },
-        {
-          name: 'III',
-          type: 'scatter',
-          xAxisIndex: 2,
-          yAxisIndex: 2,
-          data: dataAll[2],
-          markLine: markLineOpt
+        tooltip: {
+          formatter: 'y = 0.5 * x + 3'
         },
-        {
-          name: 'IV',
-          type: 'scatter',
-          xAxisIndex: 3,
-          yAxisIndex: 3,
-          data: dataAll[3],
-          markLine: markLineOpt
-        }
-      ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    seriesChart.setOption(option);
-  </script>
+        data: [[{
+          coord: [0, 3],
+          symbol: 'none'
+        }, {
+          coord: [20, 13],
+          symbol: 'none'
+        }]]
+      };
+
+      option = {
+        title: {
+          text: 'Anscombe\'s quartet',
+          left: 'center',
+          top: 0
+        },
+        // 多个绘图网格参数，分别设置不同图表的定位和属性
+        grid: [
+          { x: '7%', y: '7%', width: '38%', height: '38%' },
+          { x2: '7%', y: '7%', width: '38%', height: '38%' },
+          { x: '7%', y2: '7%', width: '38%', height: '38%' },
+          { x2: '7%', y2: '7%', width: '38%', height: '38%' }
+        ],
+        tooltip: {
+          formatter: 'Group {a}: ({c})'
+        },
+        // 多个坐标轴，对应相应的网格索引 gridIndex
+        xAxis: [
+          { gridIndex: 0, min: 0, max: 20 },
+          { gridIndex: 1, min: 0, max: 20 },
+          { gridIndex: 2, min: 0, max: 20 },
+          { gridIndex: 3, min: 0, max: 20 }
+        ],
+        yAxis: [
+          { gridIndex: 0, min: 0, max: 15 },
+          { gridIndex: 1, min: 0, max: 15 },
+          { gridIndex: 2, min: 0, max: 15 },
+          { gridIndex: 3, min: 0, max: 15 }
+        ],
+        // 多个系列列表，对应相应的坐标轴索引
+        series: [
+          {
+            name: 'I',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            data: dataAll[0],
+            markLine: markLineOpt
+          },
+          {
+            name: 'II',
+            type: 'scatter',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data: dataAll[1],
+            markLine: markLineOpt
+          },
+          {
+            name: 'III',
+            type: 'scatter',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            data: dataAll[2],
+            markLine: markLineOpt
+          },
+          {
+            name: 'IV',
+            type: 'scatter',
+            xAxisIndex: 3,
+            yAxisIndex: 3,
+            data: dataAll[3],
+            markLine: markLineOpt
+          }
+        ]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      seriesChart.setOption(option);
+    </script>
+  </article>
+
 
 </body>
 

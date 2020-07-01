@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.3 时间轴(1)-6.3 时间轴(2)-6.4 异步加载视频</title>
+  <script src="js/echarts.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <article class="container">
+    <h1>
+      时间轴、异步数据加载
+    </h1>
+    <hr>
+
+    <h2>时间轴</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="timeline" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var timeline = echarts.init(document.getElementById('timeline'));
+      // 数据
+      var data_2c = {
+        '2007年': [2509.4, 2892.53, 5571.06, 2368.53],
+        '2008年': [2626.41, 3709.78, 6085.84, 3057.78],
+        '2009年': [2855.55, 3987.84, 6001.78, 3448.77],
+        '2010年': [3388.38, 4840.23, 7218.32, 4359.12],
+        '2011年': [3752.48, 5928.32, 7927.89, 5543.04]
+      };
+      var data_3c = {
+        '2007年': [7236.15, 2250.04, 6821.11, 1825.21],
+        '2008年': [8375.76, 2886.65, 7872.23, 2160.48],
+        '2009年': [9179.19, 3405.16, 8930.85, 2474.44],
+        '2010年': [10600.84, 4238.65, 9833.51, 2881.08],
+        '2011年': [12363.18, 5219.24, 11142.86, 3623.81]
+      };
+
+      // var data_2c = [
+      //   [2509.4, 2892.53, 5571.06, 2368.53],
+      //   [2626.41, 3709.78, 6085.84, 3057.78],
+      //   [2855.55, 3987.84, 6001.78, 3448.77],
+      //   [3388.38, 4840.23, 7218.32, 4359.12],
+      //   [3752.48, 5928.32, 7927.89, 5543.04]
+      // ];
+
+      // var data_3c = [
+      //   [7236.15, 2250.04, 6821.11, 1825.21],
+      //   [8375.76, 2886.65, 7872.23, 2160.48],
+      //   [9179.19, 3405.16, 8930.85, 2474.44],
+      //   [10600.84, 4238.65, 9833.51, 2881.08],
+      //   [12363.18, 5219.24, 11142.86, 3623.81]
+      // ];
+
+      // var years = ['2007年', '2008年', '2009年', '2010年', '2011年'];
+
+      // function createData(n) {
+      //   return {
+      //     title: {
+      //       text: years[n] + '数据'
+      //     },
+      //     series: [
+      //       { data: data_2c[n] },
+      //       { data: data_3c[n] }
+      //     ]
+      //   };
+      // }
+
+      // var optionsData = [];
+
+      // for (let i = 0; i < years.length; i++) {
+      //   optionsData.push(createData(i))
+      // }
+
+      // 指定图表的配置项和数据
+      option = {
+        // 基础配置，一般放置不变的数据或参数
+        // 包括时间轴、坐标系、坐标轴等图形元素
+        baseOption: {
+          // 时间轴组件，提供了在多个 ECharts option 间进行切换、播放等操作的功能
+          timeline: {
+            axisType: 'category',   // 时间轴类型
+            orient: 'vertical',   // 时间轴摆放方式，'vertical' 竖直放置，'horizontal' 水平放置
+            // 时间轴在容器中的定位
+            right: 10,
+            top: 50,
+            bottom: 50,
+            width: 65,
+            inverse: true,
+            playInterval: 1000,   // 播放的速度（跳动的间隔），单位毫秒（ms）
+            autoPlay: true,
+            // timeline 数据。Array 的每一项，可以是直接的数值。
+            // 如果需要对每个数据项单独进行样式定义，则数据项写成 Object，其中 value 属性为时间轴相应的数值
+            data: ['2007年', '2008年', '2009年', '2010年',
+              // 最后一年添加特定的样式
+              {
+                value: '2011年',
+                symbol: 'diamond',  // 此项的图形的特别设置。
+                symbolSize: 16      // 此项的图形大小的特别设置。
+              },]
+          },
+          legend: {},
+          xAxis: {
+            type: 'category',
+            data: ['北京', '天津', '上海', '重庆']
+          },
+          yAxis: {
+            type: 'value'
+          },
+          // 在基础配置中，系列列表设置的是系列名称，而不需要指定具体数
+          series: [
+            {
+              type: 'bar',
+              stack: {},
+              name: '第一产业'
+            },
+            {
+              type: 'bar',
+              stack: {},
+              name: '第二产业'
+            }
+          ]
+        },
+
+        // options 放置需要切换的数据
+        // 一个对象数组包含具体的系列数据，其中每个元素（对象）对应一个 option（需要切换的数据），一般是对应一个时间点（年份）的数据
+        options: [
+          {
+            title: {
+              text: '2007年数据'
+            },
+            series: [
+              { data: data_2c['2007年'] },
+              { data: data_3c['2007年'] }
+            ]
+          },
+          {
+            title: {
+              text: '2008年数据'
+            },
+            series: [
+              { data: data_2c['2008年'] },
+              { data: data_3c['2008年'] }
+            ]
+          },
+          {
+            title: {
+              text: '2009年数据'
+            },
+            series: [
+              { data: data_2c['2009年'] },
+              { data: data_3c['2009年'] }
+            ]
+          },
+          {
+            title: {
+              text: '2010年数据'
+            },
+            series: [
+              { data: data_2c['2010年'] },
+              { data: data_3c['2010年'] }
+            ]
+          },
+          {
+            title: {
+              text: '2011年数据'
+            },
+            series: [
+              { data: data_2c['2011年'] },
+              { data: data_3c['2011年'] }
+            ]
+          },
+        ]
+        // options 可以使用循环来产生
+        /*
+          var data_2c = [
+              [2509.4, 2892.53, 5571.06, 2368.53],
+              [2626.41, 3709.78, 6085.84, 3057.78],
+              [2855.55, 3987.84, 6001.78, 3448.77],
+              [3388.38, 4840.23, 7218.32, 4359.12],
+              [3752.48, 5928.32, 7927.89, 5543.04]
+          ];
+
+          var data_3c = [
+              [7236.15, 2250.04, 6821.11, 1825.21],
+              [8375.76, 2886.65, 7872.23, 2160.48],
+              [9179.19, 3405.16, 8930.85, 2474.44],
+              [10600.84, 4238.65, 9833.51, 2881.08],
+              [12363.18, 5219.24, 11142.86, 3623.81]
+          ];
+
+          var years = ['2007年', '2008年', '2009年', '2010年','2011年'];
+
+          var function createData(n) {
+            return {
+                      title: {
+                        text: year[n] + '数据'
+                      },
+                      series: [
+                        { data: data_2c[n] },
+                        { data: data_3c[n] }
+                      ]
+                    };
+          }
+
+          var optionsData = [];
+
+          for (let i=0; i<years.length; i++) {
+            optionsData.push(createData(i))
+          }
+        */
+        // options: optionsData,
+
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      timeline.setOption(option);
+    </script>
+
+    <h2>异步数据加载</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="asyncDataLoading" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 echarts 实例
+      var asyncDataLoading = echarts.init(document.getElementById('asyncDataLoading'));
+
+      // 基准数值
+      var base = +new Date(2020, 6, 2);
+      var oneDay = 24 * 3600 * 1000;
+      var date = [];
+      // 生成（模拟）随机数
+      var data = [Math.random() * 150];
+      var now = new Date(base);
+      // 添加新数据的函数，其中参数 shift 为 true 时会保证展示的数据量不变（不会进行累积）
+      function addData(shift) {
+        now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+        date.push(now);
+        data.push((Math.random() - 0.4) * 10 + data[data.length - 1]);
+
+        if (shift) {
+          // 新增一条数据的同时，删除数组中的第一条数据
+          date.shift();
+          data.shift();
+        }
+        // 新增一天
+        now = new Date(+new Date(now) + oneDay);
+      }
+
+      // 预先生成 100 个模拟数据进行展示
+      for (var i = 1; i < 100; i++) {
+        addData();
+      }
+      // 指定图表的配置项
+      option = {
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: date
+        },
+        yAxis: {
+          boundaryGap: [0, '50%'],
+          type: 'value'
+        },
+        series: [
+          {
+            name: '成交',
+            type: 'line',
+            smooth: true,
+            symbol: 'none',
+            stack: 'a',
+            areaStyle: {
+              normal: {}
+            },
+            data: data
+          }
+        ]
+      };
+      // 使用函数 setInterval 每隔 500 毫秒调用函数 addData 新增数据，然后执行函数 setOption 「刷新」图表
+      setInterval(function () {
+        addData(true);
+        asyncDataLoading.setOption({
+          xAxis: {
+            data: date
+          },
+          series: [{
+            name: '成交',
+            data: data
+          }]
+        });
+      }, 500);
+      // 使用刚指定的配置项和数据显示图表。
+      asyncDataLoading.setOption(option);
+    </script>
+  </article>
+</body>
+
+</html>

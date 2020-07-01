@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.4 数据加载</title>
+  <script src="echarts.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>数据加载</h1>
+  <hr>
+  <div id="lineChart" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var Chart = echarts.init(document.getElementById('lineChart'));
+    // 指定图表的配置项和数据
+    var option = {
+      aria: {
+        show: true
+      },
+      grid: {
+        top: '20%'
+      },
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      // 数据
+      // 系列列表
+      series: [{
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'line',   // bar, scatter, line, pie
+        label: {
+          show: true,
+          color: 'red',
+          position: 'bottom',
+          distance: 20,
+          fontFamily: 'Microsoft YaHei',
+          fonSize: 20
+        },
+        emphasis: {
+          label: {
+            show: true,
+            position: 'top',
+            fontSize: 25
+          },
+          itemStyle: {
+            color: 'orange',
+          }
+        },
+        lineStyle: {
+          color: 'red'
+        },
+        // 标注点
+        markPoint: {
+          data: [
+            { type: 'max', name: '最大值' },  // 支持 'average', 'min', 'max'
+            { type: 'average', name: '均值' }
+          ],
+          symbol: 'pin'  // 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+        },
+        // 辅助线
+        markLine: {
+          silent: false,
+          data: [
+            { type: 'average', name: '平均值', lineStyle: { color: 'red' } },  // 支持 'average', 'min', 'max'
+            { yAxis: 100, name: '任意值', lineStyle: { color: 'blue' } },
+            { xAxis: 5, name: '任意值', lineStyle: { color: 'blue' } },
+            [
+              { name: '两个坐标之间的标线', coord: [0, 0], lineStyle: { color: 'green' } },
+              { coord: [2, 200] }
+            ]
+          ]
+        },
+        // 辅助面
+        markArea: {
+          silent: false,
+          data: [
+            [
+              // type设置两点距离
+              { name: '平均值到最大值', type: 'average', itemStyle: { color: 'gray', opacity: 0.8 } },
+              { type: 'max' }
+            ],
+            [
+              { name: '任意两点距离', coord: [0, 50], itemStyle: { color: 'gray', opacity: 0.8 } },
+              { coord: [2, 200] }
+            ],
+            [
+              { name: 'y轴某一区间', yAxis: 10, itemStyle: { color: 'gray', opacity: 0.8 } },
+              { yAxis: 20 }
+            ]
+          ],
+          label: {
+            position: 'top',
+            rotate: 45,
+            distance: 30
+          }
+        }
+      }]
+    };
+    Chart.setOption(option, true);
+  </script>
+</body>
+
+</html>

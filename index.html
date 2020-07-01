@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echarts 学习笔记</title>
+  <link rel="icon" href="images/DataVis.svg" type="image/svg" sizes="16x16" />
+  <!--cdn from https://cdnjs.com/ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    img {
+      width: 5%
+    }
+  </style>
+</head>
+
+</div>
+<div class="container">
+  <h1>基础</h1>
+  <div class="card">
+    <div class="card-header">
+      图表基本元素：标题、图框
+    </div>
+    <div class="card-body">
+      <p class="card-text">介绍使用 Echart 模块的基本的起手式</p>
+      <p class="card-text">标题 <code>title</code> 的常用属性</p>
+      <p class="card-text">图框 <code>grid</code> 的常用属性</p>
+      <a href=".\c03-4-01.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      图表基本元素：坐标轴、图例
+    </div>
+    <div class="card-body">
+      <p class="card-text">介绍常见坐标系：xy坐标系，极坐标系。以及其坐标轴的主要参数，如
+        <code>xAxis</code>、<code>yAxis</code>、<code>polar</code>、<code>radiusAxis</code>、<code>angleAxis</code> 的常用属性
+      </p>
+      <p class="card-text">雷达图 <code>radar</code> 的常用属性</p>
+      <p class="card-text">图例 <code>legend</code> 的常用属性</p>
+      <a href=".\c03-4-02.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      数据加载
+    </div>
+    <div class="card-body">
+
+      <p class="card-text">介绍数据主要存放的参数 <code>series</code> 系列列表的常用属性</p>
+      <p class="card-text">添加常见的标记元素 <code>markPoint</code>、<code>markLine</code>、<code>markArea</code> 系列列表的常用属性</p>
+
+      <a href=".\c03-4-04.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
+    </div>
+  </div>
+
+  <h1>常见图表类型</h1>
+  <div class="row row-cols-1 row-cols-lg-2">
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/line.svg" alt="Line Chart">
+          <img src="images/area.svg" alt="Area Chart">
+          折线图、面积图、河流图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建折线图和面积图的基本方法</p>
+          <p class="card-text">创建河流图 themeRiver 的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-05.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/bar.svg" alt="Line Chart">
+          <img src="images/bar-2.svg" alt="Line Chart">
+          柱状图、条形图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建柱状图和条形图的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-07.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/polar.svg" alt="Polar Chart">
+          极坐标图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建极坐标图的基本方法</p>
+          <p class="card-text">极坐标图有多种类型，分别对应于 Bar Chart 的多种类型（柱状图、条形图、瀑布图）</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-08.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/pie.svg" alt="Pie Chart">
+          <img src="images/pie-2.svg" alt="Doughnut Chart">
+          饼图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建饼图和环形图的基本方法</p>
+          <p class="card-text">基于饼图创建南丁格尔图</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-09.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/radar.svg" alt="Radar Chart">
+          雷达图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建雷达图的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-10.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/bubble.svg" alt="Bubble Chart">
+          散点图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建散点图和气泡图的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-11.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/box.svg" alt="Boxplot Chart">
+          箱线图、K线图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建箱线图和K线图的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-12.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images/funnel.svg" alt="Funnel Chart">
+          <img src="images/gauge.svg" alt="Gauge Chart">
+          漏斗图、仪表盘
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建漏斗图和仪表盘的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-13.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mb-4">
+      <div class="card h-100 mt-3">
+        <div class="card-header">
+          <img src="images\calendar.svg" alt="Calendar Chart">
+          日历图
+        </div>
+        <div class="card-body">
+          <p class="card-text">创建漏斗图和仪表盘的基本方法</p>
+        </div>
+        <div class="card-footer">
+          <a href=".\c03-4-14.html" target="_blank" class="btn btn-outline-primary btn-block">详细实例</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.1 图表基本元素（1）：标题、图框</title>
+  <script src="echarts.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>
+    图表基本元素：标题、图框
+  </h1>
+  <hr>
+  <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+  <div id="barChart" style="height:600px"></div>
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var myChart = echarts.init(document.getElementById('barChart'));
+
+    // 指定图表的配置项和数据
+    var option = {
+      // 开启自动智能生成关于图表的描述（无障碍）
+      aria: {
+        show: true
+      },
+      // 设置标题
+      title: {
+        show: true,   // 是否显示，默认为 true
+        text: '样例图表',   // 标题内容
+        link: 'https://echarts.apache.org/zh/index.html',   // 标题链接
+        textStyle: {
+          color: 'orange',
+          fontFamily: 'Microsoft YaHei',
+          fontSize: 30,
+        },
+        subtext: '副标题',
+        subtextStyle: {
+          fontSize: 15,
+        },
+        itemGap: 10,
+        left: 'center',
+        backgroundColor: 'gray',
+        borderRadius: 5,
+        padding: 15
+      },
+      // 图例
+      legend: {
+        data: ['销量']
+      },
+      // 图框
+      grid: {
+        show: true,   // 决定背景颜色等设置是否呈现
+        top: '20%',
+        width: '80%',
+      },
+      // X 轴
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      // Y 轴
+      yAxis: {},
+      // 数据集
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  </script>
+
+</body>
+
+</html>

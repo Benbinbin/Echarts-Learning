@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.13 漏斗图、仪表盘</title>
+  <script src="echarts.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>漏斗图、仪表盘</h1>
+  <hr>
+  <h2>漏斗图</h2>
+  <div id="funnelChart" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var funnelChart = echarts.init(document.getElementById('funnelChart'));
+    // 指定图表的配置项和数据
+    option = {
+      title: {
+        text: '漏斗图',
+        subtext: '纯属虚构'
+      },
+      legend: {
+        // data: ['展现','点击','访问','咨询','订单']
+      },
+      series: [
+        {
+          name: '漏斗图',
+          type: 'funnel',   // 漏斗图类型
+          // 显示的最大最小值
+          min: 0,
+          max: 100,
+          // 相应最大最小值时显示的线长百分比
+          minSize: '0%',
+          maxSize: '100%',
+          sort: 'descending',   // 降序排列
+          gap: 2,
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [
+            { value: 60, name: '访问' },
+            { value: 40, name: '咨询' },
+            { value: 20, name: '订单' },
+            { value: 80, name: '点击' },
+            { value: 100, name: '展现' }
+          ]
+        }
+      ]
+    };
+
+    funnelChart.setOption(option, true);
+  </script>
+
+  <h2>仪表盘</h2>
+  <div id="gaugeChart" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var gaugeChart = echarts.init(document.getElementById('gaugeChart'));
+    // 指定图表的配置项和数据
+    option = {
+      // 鼠标悬停弹出框
+      // formatter 一般用于作为格式化字符串的模板，其中模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。
+      tooltip: {
+        formatter: '{a} <br/>{b} : {c}%'
+      },
+      series: [
+        // 可以设置多个系列，同时显示多个仪表盘（需要设置 center 属性设置合适的定位）
+        {
+          name: '业务指标',
+          type: 'gauge',   // 仪表盘类型
+          // 仪表盘详情（中间显示的数据）
+          detail: {
+            // 对显示的数据内容进行格式化
+            formatter: '{value}%'
+          },
+          // 一个对象数组，每个对象（数据）对应一个指针（一个仪表盘可以有多根指针）
+          data: [{value: 50,name: '完成率'}]
+        }
+      ]
+    };
+
+    // 每 2 秒随机生成一个数值，以改变仪表盘的指针指示的值
+    setInterval(function () {
+      option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+      gaugeChart.setOption(option, true);
+    }, 2000);
+    gaugeChart.setOption(option, true);
+  </script>
+</body>
+
+</html>

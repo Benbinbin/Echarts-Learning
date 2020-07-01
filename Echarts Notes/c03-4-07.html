@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.7 柱状图、条形图</title>
+  <script src="echarts.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>柱状图、条形图</h1>
+  <hr>
+  <h2>柱状图</h2>
+
+  <div id="barChart" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var lineChart = echarts.init(document.getElementById('barChart'));
+    // 指定图表的配置项和数据
+    option = {
+      aria: {
+        show: true
+      },
+      legend: {},
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value',
+        max: 250,
+      },
+      series: [{
+        name: 'sample',
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar'
+      }]
+    };
+
+    lineChart.setOption(option, true);
+  </script>
+
+  <h2>条形图</h2>
+
+  <div id="barChartHorizontal" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var barChartHorizontal = echarts.init(document.getElementById('barChartHorizontal'));
+    // 指定图表的配置项和数据
+    option = {
+      aria: {
+        show: true
+      },
+      legend: {},
+      // xAxis 和 yAxis 类型变换后，数据自动识别所使用的轴
+      // 由柱状图转换为条形图
+      yAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      xAxis: {
+        type: 'value',
+        max: 250,
+      },
+      series: [{
+        name: 'sample',
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
+        itemStyle: {
+          color: 'cyan'
+        }
+      }]
+    };
+
+    barChartHorizontal.setOption(option, true);
+  </script>
+
+  <h2>多系列柱状图</h2>
+
+  <div id="barChartSeries" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var barChartSeries = echarts.init(document.getElementById('barChartSeries'));
+    // 每个数据标记的样式设置
+    var labelOption = {
+      show: true,
+      position: 'insideBottom',
+      distance: 20,
+      verticalAlign: 'middle',
+      rotate: 90,
+    };
+    // 指定图表的配置项和数据
+    option = {
+      aria: {
+        show: true
+      },
+      color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+      legend: {
+        data: ['Forest', 'Steppe', 'Desert', 'Wetland']
+      },
+      xAxis: [
+        {
+          name: '年份',
+          type: 'category',
+          axisTick: { show: false },
+          data: ['2012', '2013', '2014', '2015', '2016']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      // 多系列数据
+      series: [
+        {
+          name: 'Forest',
+          type: 'bar',
+          barGap: 0,   // 每个组的 bar 都紧挨着
+          label: labelOption,
+          data: [320, 332, 301, 334, 390]
+        },
+        {
+          name: 'Steppe',
+          type: 'bar',
+          label: labelOption,
+          data: [220, 182, 191, 234, 290]
+        },
+        {
+          name: 'Desert',
+          type: 'bar',
+          label: labelOption,
+          data: [150, 232, 201, 154, 190]
+        },
+        {
+          name: 'Wetland',
+          type: 'bar',
+          label: labelOption,
+          data: [98, 77, 101, 99, 40]
+        }
+      ]
+    };
+
+    barChartSeries.setOption(option, true);
+  </script>
+
+  <h2>堆叠柱状图</h2>
+
+  <div id="barChartStack" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var barChartStack = echarts.init(document.getElementById('barChartStack'));
+
+    // 每个数据标记的样式设置
+    var labelOption = {
+      show: true,
+      position: 'insideBottom',
+      distance: 20,
+      verticalAlign: 'middle',
+      rotate: 90,
+    };
+    // 指定图表的配置项和数据
+    option = {
+      aria: {
+        show: true
+      },
+      legend: {
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+      },
+      xAxis: {
+        type: 'category',
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '直接访问',
+          type: 'bar',
+          stack: '总量',   // 堆叠，并设置系列名称，同一个系列名称的数据堆叠在一起
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [320, 302, 301, 334, 390, 330, 320]
+        },
+        {
+          name: '邮件营销',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: '联盟广告',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: '视频广告',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [150, 212, 201, 154, 190, 330, 410]
+        },
+        {
+          name: '搜索引擎',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            show: true,
+            position: 'inside'
+          },
+          data: [820, 832, 901, 934, 1290, 1330, 1320]
+        }
+      ]
+    };
+    barChartStack.setOption(option, true);
+  </script>
+
+  <h2>多轴、混合类型图</h2>
+
+  <div id="barChartMultipleAxis" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var barChartMultipleAxis = echarts.init(document.getElementById('barChartMultipleAxis'));
+
+    // 指定图表的配置项和数据
+    option = {
+      aria: {
+        show: true
+      },
+        legend: {
+          data: ['蒸发量', '降水量', '平均温度']
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            axisPointer: {
+              type: 'shadow'
+            }
+          }
+        ],
+        // 设置多个 yAxis
+        yAxis: [
+          // 默认使用第一个轴 yAxis 设置，索引为 0
+          {
+            type: 'value',
+            name: '水量',
+            min: 0,
+            max: 250,
+            interval: 50,
+            axisLabel: {
+              formatter: '{value} ml'
+            }
+          },
+          {
+            type: 'value',
+            name: '温度',
+            min: 0,
+            max: 25,
+            interval: 5,
+            axisLabel: {
+              formatter: '{value} °C'
+            }
+          }
+        ],
+        series: [
+          {
+            name: '蒸发量',
+            type: 'bar',   // 柱状图
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+          },
+          {
+            name: '降水量',
+            type: 'bar',   // 柱状图
+            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+          },
+          {
+            name: '平均温度',
+            type: 'line',   // 折现图
+            yAxisIndex: 1,   // 设置使用第二个轴 yAxis 设置，索引为 1
+            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+          }
+        ]
+      };
+
+    barChartMultipleAxis.setOption(option, true);
+  </script>
+
+  <h2>瀑布柱状图</h2>
+
+  <div id="barChartWaterfall" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var barChartWaterfall = echarts.init(document.getElementById('barChartWaterfall'));
+
+    // 指定图表的配置项和数据
+  option = {
+    aria: {
+      show: true
+    },
+    title: {
+      text: '阶梯瀑布图',
+      subtext: 'From ExcelHome',
+      sublink: 'http://e.weibo.com/1341556070/Aj1J2x5a5'
+    },
+    legend: {
+      data: ['支出', '收入']
+    },
+    xAxis: {
+      type: 'category',
+      data: (function () {
+        var list = [];
+        for (var i = 1; i <= 11; i++) {
+          list.push('11月' + i + '日');
+        }
+        return list;
+      })()
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      // 辅助数据是作为「基础值」，基于前一天的总计和今天的数据算出
+      // 如果今天是「增长」，基础值就是前一天的总计，增长部分等于今天的值（红色高亮）
+      // 如果今天是「亏损」，基础值就是基于前一天的总计减去今天的值（绿色高亮）
+      {
+        name: '辅助',
+        type: 'bar',
+        stack: '总量',
+        itemStyle: {
+          color: 'rgba(0,0,0,0)'   // 基础值设置为全透明
+        },
+        data: [0, 900, 1245, 1530, 1376, 1376, 1511, 1689, 1856, 1495, 1292]
+      },
+      {
+        name: '收入',
+        type: 'bar',
+        stack: '总量',
+        label: {
+          show: true,
+          position: 'top'   // 增长时，标记放在上方，表示当前的最终数值
+        },
+        data: [900, 345, 393, '-', '-', 135, 178, 286, '-', '-', '-'],
+        itemStyle: {
+          color: 'red'
+        },
+      },
+      {
+        name: '支出',
+        type: 'bar',
+        stack: '总量',
+        label: {
+          show: true,
+          position: 'bottom'   // 亏损时，标记放在下方，表示当前的最终数值
+        },
+        data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203],
+        itemStyle: {
+          color: 'green'
+        },
+      }
+    ]
+  };
+
+    barChartWaterfall.setOption(option, true);
+  </script>
+
+</body>
+
+</html>

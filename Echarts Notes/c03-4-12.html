@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.12 箱型图、K线图</title>
+  <script src="echarts.js"></script>
+  <!-- 引入 dataTool 工具处理数据 -->
+  <script src="dataTool.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>箱线图、K线图</h1>
+  <hr>
+  <h2>基础盒须图</h2>
+  <div id="boxPlot" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var boxPlot = echarts.init(document.getElementById('boxPlot'));
+    // 数据
+    // 箱线图的 data 默认接受一个二维数组，它含有五个量值，依次是 [min, Q1, median(or Q2), Q3, max]，每一数组项渲染一个 box
+    // 也可以使用 ECharts 额外提供的拓展插件，函数对原始数据处理进行简单的数据统计，从源数据计算出相应的五个统计结果量值
+    // 数据处理工具：https://github.com/apache/incubator-echarts/tree/master/extension/dataTool 我们需要使用 prepareBoxplotData.js 中的工具
+    // 下载编译好的工具包：https://raw.githubusercontent.com/apache/incubator-echarts/master/dist/extension/dataTool.min.js
+
+    // 使用 echarts 提供的工具处理源数据，计算出相应的五个统计结果量值
+    // 数据源是二维数组，其中每一元素（内嵌数组）渲染一个 box
+    var data = echarts.dataTool.prepareBoxplotData([
+      [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+      [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790, 810, 880, 880, 830, 800, 790, 760, 800],
+      [880, 880, 880, 860, 720, 720, 620, 860, 970, 950, 880, 910, 850, 870, 840, 840, 850, 840, 840, 840],
+      [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+      [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
+    ]);
+    // 指定图表的配置项
+    option = {
+      title: [
+        {
+          text: 'Michelson-Morley Experiment',
+        },
+        // 左下角的注释
+        {
+          text: 'upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR',
+          borderColor: '#999',
+          borderWidth: 1,
+          textStyle: {
+            fontSize: 14
+          },
+          left: '10%',
+          top: '90%'
+        }
+      ],
+      // tooltip: {
+      //   trigger: 'item',
+      //   axisPointer: {
+      //     type: 'shadow'
+      //   }
+      // },
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+      },
+      xAxis: {
+        type: 'category',
+        data: data.axisData,
+        boundaryGap: true,
+        axisLabel: {
+          formatter: 'expr {value}'
+        },
+        nameGap: 30,
+      },
+      yAxis: {
+        type: 'value',
+        name: 'km/s minus 299,000',
+      },
+      series: [
+        // 箱线图主体数据
+        {
+          name: 'boxplot',
+          type: 'boxplot',   // 箱线图图表类型
+          data: data.boxData,
+        },
+        // 异常值数据
+        {
+          name: 'outlier',
+          type: 'scatter',
+          data: data.outliers
+        }
+      ]
+    };
+
+    boxPlot.setOption(option, true);
+  </script>
+
+  <h2>系列盒须图</h2>
+  <div id="boxPlotSeries" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var boxPlotSeries = echarts.init(document.getElementById('boxPlotSeries'));
+
+    // 源数据
+    // 两组（系列）数据，第一组有 2 个样本，第二组有 3 个样本
+    var d1 = [
+      [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+      [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790, 810, 880, 880, 830, 800, 790, 760, 800]
+    ];
+    var d2 = [
+      [880, 880, 880, 860, 720, 720, 620, 860, 970, 950, 880, 910, 850, 870, 840, 840, 850, 840, 840, 840],
+      [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+      [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
+    ];
+    // 使用 echarts 提供的工具处理元数据，计算出相应的五个统计结果量值
+    var data1 = echarts.dataTool.prepareBoxplotData(d1);
+    var data2 = echarts.dataTool.prepareBoxplotData(d2);
+    // 指定图表的配置项
+    option = {
+      title: [
+        {
+          text: 'Michelson-Morley Experiment',
+        },
+        // 左下角的注释
+        {
+          text: 'upper: Q3 + 1.5 * IQR \nlower: Q1 - 1.5 * IQR',
+          borderColor: '#999',
+          borderWidth: 1,
+          textStyle: {
+            fontSize: 14
+          },
+          left: '10%',
+          top: '90%'
+        }
+      ],
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+      },
+      legend: { show: true, },
+      xAxis: {
+        type: 'category',
+        data: data2.axisData,   // 基于样本量较多的系列构建 xAxis
+        boundaryGap: true,
+        nameGap: 30,
+      },
+      yAxis: {
+        type: 'value',
+        name: 'km/s minus 299,000',
+      },
+      series: [
+        // 多系列（分组）箱线图，用于横向对比不同系列中各样本的分布
+        // 系列一
+        {
+          name: 'Series1',
+          type: 'boxplot',
+          data: data1.boxData,
+        },
+        // 系列二
+        {
+          name: 'Series2',
+          type: 'boxplot',
+          data: data2.boxData,
+        },
+      ]
+    };
+
+    boxPlotSeries.setOption(option, true);
+  </script>
+
+  <h2>K线图</h2>
+  <div id="candlestickChart" style="height:600px"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 echarts 实例
+    var candlestickChart = echarts.init(document.getElementById('candlestickChart'));
+
+    // 指定图表的配置项
+    option = {
+      xAxis: {
+        data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
+      },
+      yAxis: {},
+      series: [{
+        type: 'k',   // 图表数据类型，支持 'candlestick' 和简写 'k'（会被自动转为 'candlestick'）
+        // 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+        data: [
+          [20, 30, 10, 35],
+          [40, 35, 30, 55],
+          [33, 38, 33, 40],
+          [40, 40, 32, 42]
+        ]
+      }]
+    };
+
+    candlestickChart.setOption(option, true);
+  </script>
+</body>
+
+</html>

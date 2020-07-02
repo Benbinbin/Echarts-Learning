@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepFit</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+  <script src="data/data.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <article class="container mt-5">
+    <div id="calendarChart" style="height:600px;"></div>
+    <script type="text/javascript">
+      var calendarChart = echarts.init(document.getElementById('calendarChart'));
+
+      option = {
+        baseOption: {
+          title: {
+            text: '健康数据可视化',
+            left: 'center'
+          },
+          timeline: {
+            axisType: 'category',
+            orient: 'vertical',
+            right: 10,
+            top: 'middle',
+            width: 10,
+            height: 300,
+            label: {
+              position: 'right',
+              align: 'right',
+              padding: 20
+            },
+            autoPlay: false,
+            controlPosition: 'none',
+            data: ['摄入卡路里', '消耗卡路里', '运动时间']
+          },
+          legend: {
+            top: '5%',
+          },
+          tooltip: {},
+          toolbox: {
+            top: '5%',
+            right: '10%',
+            feature: {
+              restore: {},
+              dataView: {}
+            }
+          },
+          calendar: [
+            {
+              top: '15%',
+              left: 'center',
+              range: ['2018-01-01', '2018-06-30'],
+              itemStyle: {
+                borderWidth: 0.5
+              },
+              dayLabel: { nameMap: 'cn' },
+              monthLabel: { nameMap: 'cn' },
+              yearLabel: {}
+            },
+            {
+              top: '45%',
+              left: 'center',
+              range: ['2018-01-01', '2018-06-30'],
+              itemStyle: {
+                borderWidth: 0.5
+              },
+              yearLabel: {}
+            },
+            {
+              top: '75%',
+              left: 'center',
+              range: ['2018-01-01', '2018-06-30'],
+              itemStyle: {
+                borderWidth: 0.5
+              },
+              yearLabel: {}
+            },
+          ],
+          series: [
+            {
+              name: '小明',
+              // type: 'heatmap',
+              // 使用散点图
+              type: 'scatter',
+              coordinateSystem: 'calendar',
+            },
+            {
+              name: '小王',
+              type: 'scatter',
+              coordinateSystem: 'calendar',
+              calendarIndex: 1,
+            },
+            {
+              name: '小张',
+              type: 'scatter',
+              coordinateSystem: 'calendar',
+              calendarIndex: 2,
+            }
+          ]
+        },
+        options: [
+          {
+            // visualMap: {
+            //   top: 'middle',
+            //   min: 1000,
+            //   max: 2000,
+            //   type: 'continuous',
+            //   calculable: true
+            // },
+            series: [
+              {
+                data: data_in[0],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 50000;
+                }
+              },
+              {
+                data: data_in[1],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 50000;
+                }
+              },
+              {
+                data: data_in[2],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 50000;
+                }
+              },
+            ]
+          },
+          {
+            // visualMap: {
+            //   top: 'middle',
+            //   min: 1000,
+            //   max: 2000,
+            //   type: 'continuous',
+            //   calculable: true
+            // },
+            series: [
+              {
+                data: data_out[0],
+                // 使用散点图中点的大小指示数值大小
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 200000;
+                }
+              },
+              {
+                data: data_out[1],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 200000;
+                }
+              },
+              {
+                data: data_out[2],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 200000;
+                }
+              },
+            ]
+
+          },
+          {
+            // visualMap: {
+            //   top: 'middle',
+            //   min: 0,
+            //   max: 500,
+            //   type: 'continuous',
+            //   calculable: true
+            // },
+            series: [
+              {
+                data: data_time[0],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 6500;
+                }
+              },
+              {
+                data: data_time[1],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 6500;
+                }
+              },
+              {
+                data: data_time[2],
+                symbolSize: function (value) {
+                  return value[1] ** 2 / 6500;
+                }
+              },
+            ]
+          },
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      calendarChart.setOption(option);
+    </script>
+  </article>
+
+</body>
+
+</html>

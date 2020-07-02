@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人消费结余数据可视化</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+  <script src="data/data.js"></script>
+<script src="js/macarons.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <article class="container mt-5">
+    <div id="lineChart" style="height:500px;"></div>
+    <script type="text/javascript">
+      var lineChart = echarts.init(document.getElementById('lineChart'), 'macarons');
+
+      var option = {
+        title: {
+          text: '个人消费结余数据可视化',
+          left: 'center',
+        },
+        grid: {
+          top: '20%',
+          bottom: '20%',
+        },
+        toolbox: {
+          right: '10%',
+          feature: {
+            restore: {},
+            dataZoom: {},
+            dataView: {},
+            magicType: {
+              type: ['line', 'bar', 'stack', 'tiled']
+            },
+            saveAsImage: {},
+          }
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+          type: 'shadow'
+          }
+        },
+        dataZoom: {
+          type: 'slider',
+          startValue: '2018/3/15',
+          endValue: '2018/8/17'
+        },
+        legend: {
+          top: '10%'
+        },
+        xAxis: {
+          type: 'category',
+          data: date,
+        },
+        yAxis: {
+          name: '单位：元',
+          min: 3000
+        },
+        series: [
+          {
+            name: '财富累计_小帅',
+            type: 'line',
+            data: data_xiaoshuai,
+          },
+          {
+            name: '财富累计_小美',
+            type: 'line',
+            data: data_xiaomei,
+          },
+          {
+            name: '财富累计_老王',
+            type: 'line',
+            data: data_laowang,
+          },
+          {
+            name: '财富累计_大胖',
+            type: 'line',
+            data: data_dapang,
+          },
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      lineChart.setOption(option);
+    </script>
+  </article>
+
+</body>
+
+</html>

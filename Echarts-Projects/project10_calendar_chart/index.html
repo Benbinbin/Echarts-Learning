@@ -25,16 +25,6 @@
           },
           timeline: {
             axisType: 'category',
-            orient: 'vertical',
-            right: 10,
-            top: 'middle',
-            width: 10,
-            height: 300,
-            label: {
-              position: 'right',
-              align: 'right',
-              padding: 20
-            },
             autoPlay: false,
             controlPosition: 'none',
             data: ['摄入卡路里', '消耗卡路里', '运动时间']
@@ -44,8 +34,9 @@
           },
           tooltip: {},
           toolbox: {
-            top: '5%',
-            right: '10%',
+            top: '15%',
+            right: '5%',
+            orient: 'vertical',
             feature: {
               restore: {},
               dataView: {}
@@ -54,6 +45,8 @@
           calendar: [
             {
               top: '15%',
+              width: '80%',
+              height: '20%',
               left: 'center',
               range: ['2018-01-01', '2018-06-30'],
               itemStyle: {
@@ -64,7 +57,9 @@
               yearLabel: {}
             },
             {
-              top: '45%',
+              top: '40%',
+              width: '80%',
+              height: '20%',
               left: 'center',
               range: ['2018-01-01', '2018-06-30'],
               itemStyle: {
@@ -73,7 +68,9 @@
               yearLabel: {}
             },
             {
-              top: '75%',
+              bottom: '15%',
+              width: '80%',
+              height: '20%',
               left: 'center',
               range: ['2018-01-01', '2018-06-30'],
               itemStyle: {
@@ -117,19 +114,19 @@
               {
                 data: data_in[0],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 50000;
+                  return value[1] ** 2 / 60000;
                 }
               },
               {
                 data: data_in[1],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 50000;
+                  return value[1] ** 2 / 60000;
                 }
               },
               {
                 data: data_in[2],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 50000;
+                  return value[1] ** 2 / 60000;
                 }
               },
             ]
@@ -177,19 +174,19 @@
               {
                 data: data_time[0],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 6500;
+                  return value[1] ** 2 / 8000;
                 }
               },
               {
                 data: data_time[1],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 6500;
+                  return value[1] ** 2 / 8000;
                 }
               },
               {
                 data: data_time[2],
                 symbolSize: function (value) {
-                  return value[1] ** 2 / 6500;
+                  return value[1] ** 2 / 8000;
                 }
               },
             ]

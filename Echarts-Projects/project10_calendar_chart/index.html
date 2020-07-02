@@ -32,7 +32,11 @@
           legend: {
             top: '5%',
           },
-          tooltip: {},
+          tooltip: {
+            formatter: function(params) {
+              return `${params.value[0]}<br/>${params.seriesName}：${params.value[1]}`
+            }
+          },
           toolbox: {
             top: '15%',
             right: 0,

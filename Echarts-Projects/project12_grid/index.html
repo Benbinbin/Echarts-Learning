@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympics Athletes Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <!--cdn from https://cdnjs.com/ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+  <!-- 引入 Echarts 拓展数据处理工具包，使用 prepareBoxplotData 函数对原始数据进行处理 -->
+  <script src="js/dataTool.min.js"></script>
+  <script src="data/data.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              可视化项目
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item"
+                href="https://benbinbin.github.io/Echarts-Learning/Echarts-Projects/project09_line_chart/index.html">个人消费结余数据可视化</a>
+              <a class="dropdown-item"
+                href="https://benbinbin.github.io/Echarts-Learning/Echarts-Projects/project10_calendar_chart/index.html">健身数据可视化</a>
+              <!-- <a class="dropdown-item" href="#interact">动态交互</a> -->
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              笔记
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://benbinbin.github.io/Echarts-Learning#basic">基础</a>
+              <a class="dropdown-item" href="https://benbinbin.github.io/Echarts-Learning#charts">常见图表类型</a>
+              <a class="dropdown-item" href="https://benbinbin.github.io/Echarts-Learning#interact">动态交互</a>
+            </div>
+          </li>
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <article class="container mt-5">
+    <div id="gridChart" style="height:1000px;"></div>
+    <script type="text/javascript">
+      var gridChart = echarts.init(document.getElementById('gridChart'));
+
+      // 处理 boxplot 原始数据
+      var boxData = echarts.dataTool.prepareBoxplotData(boxplotData);
+
+      option = {
+        title: [
+          {
+            text: '运动员身高体重分布',
+            top: '10%',
+            left: '7%'
+          },
+          {
+            text: '运动员热度',
+            top: '55%',
+            left: '7%'
+          },
+          {
+            text: '不同项目奖牌情况',
+            top: '10%',
+            left: '55%'
+          },
+          {
+            text: '不同项目年情况',
+            top: '55%',
+            left: '55%'
+          },
+        ],
+        grid: [
+          { left: '7%', top: '15%', width: '40%', height: '30%' },
+          { left: '7%', top: '60%', width: '40%', height: '30%' },
+          { left: '55%', top: '15%', width: '40%', height: '30%' },
+          { left: '55%', top: '60%', width: '40%', height: '30%' }
+        ],
+        legend: {},
+        tooltip: {
+          show: false
+        },
+        toolbox: {
+          top: '5%',
+          left: 'center',
+          feature: {
+            saveAsImage: {},
+            restore: {},
+            dataView: {},
+            dataZoom: {},
+          }
+        },
+        brush: {
+          toolbox: ['lineX', 'clear'],
+          xAxisIndex: 'all',
+          yAxisIndex: 'all'
+        },
+        dataZoom: [
+          {
+            type: 'slider',
+            orient: 'horizontal',
+            xAxisIndex: [0, 1]
+          },
+          {
+            type: 'slider',
+            orient: 'horizontal',
+            xAxisIndex: [2, 3]
+          }
+        ],
+        axisPointer: {
+          show: 'cross',
+          snap: true
+        },
+        xAxis: [
+          {
+            name: '身高',
+            nameLocation: 'middle',
+            nameGap: 35,
+            gridIndex: 0,
+            type: 'value',
+            min: 130,
+            max: 230,
+            axisLabel: {
+              formatter: '{value}cm'
+            }
+          },
+          {
+            gridIndex: 1,
+            axisLabel: {
+              rotate: 90
+            },
+            type: 'category',
+            data: ['丁宁', '张继科', '孔令辉', '王励勤', '福原爱', '孙杨', '宁泽涛', '林丹', '傅海峰', '田亮', '刘翔', '易建联', '惠若琪'],
+            boundaryGap: false
+          },
+          {
+            gridIndex: 2,
+            type: 'category',
+            axisLabel: {
+              rotate: 45
+            },
+            splitArea: {
+              show: true
+            },
+            data: ['羽毛球', '篮球', '拳击', '跳水', '剑击', '体操', '乒乓球', '游泳', '举重']
+          },
+          {
+            gridIndex: 3,
+            type: 'category',
+            axisLabel: {
+              rotate: 45
+            },
+            splitArea: {
+              show: true
+            },
+            data: ['羽毛球', '篮球', '拳击', '跳水', '剑击', '体操', '乒乓球', '游泳', '举重']
+          }
+        ],
+        yAxis: [
+          {
+            name: '体重',
+            nameLocation: 'middle',
+            nameGap: 50,
+            gridIndex: 0,
+            type: 'value',
+            min: 20,
+            max: 150,
+            axisLabel: {
+              formatter: '{value}kg'
+            }
+          },
+          {
+            gridIndex: 1,
+            type: 'value',
+          },
+          {
+            gridIndex: 2,
+            type: 'value'
+          },
+          {
+            gridIndex: 3,
+            type: 'value'
+          }
+        ],
+        series: [
+          // 左上方图表的数据
+          {
+            name: '男性',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            data: height_weight_male,
+            symbol: 'emptyCircle',
+            symbolSize: 5,
+            tooltip: {
+              show: true,
+              formatter: function (params) {
+                return params.value[3] + '<br>性别：男<br>身高：' + params.value[0] + 'cm<br>体重：' + params.value[1] + 'kg'
+              }
+            },
+          },
+          {
+            name: '女性',
+            type: 'scatter',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            data: height_weight_female,
+            symbol: 'emptyCircle',
+            symbolSize: 5,
+            tooltip: {
+              show: true,
+              formatter: function (params) {
+                return params.value[3] + '<br>性别：女<br>身高：' + params.value[0] + 'cm<br>体重：' + params.value[1] + 'kg'
+              }
+            }
+          },
+          // 左下角图表的数据
+          {
+            name: '百度搜索热度',
+            type: 'line',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data: [1380000, 1760000, 1120000, 1180000, 1460000, 2910000, 2310000, 2500000, 879000, 1970000, 2640000, 2490000, 660000],
+            stack: 'searchIndex',
+            smooth: true,
+            areaStyle: {
+              color: 'green'
+            },
+            tooltip: {
+              show: true,
+            }
+          },
+          {
+            name: 'Bing 搜索热度',
+            type: 'line',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data: [235000, 272000, 142000, 86000, 364000, 750000, 477000, 202000, 79000, 124000, 166000, 217000, 36900],
+            stack: 'searchIndex',
+            smooth: true,
+            areaStyle: {
+              color: 'orange'
+            },
+            tooltip: {
+              show: true,
+            }
+          },
+          // 右上方图表的数据
+          {
+            name: '金牌数量',
+            type: 'bar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            data: [10, '-', '-', 22, 6, 26, 30, 64, 13],
+            itemStyle: {
+              color: 'gold'
+            },
+            stack: 'medal',
+          },
+          {
+            name: '银牌数量',
+            type: 'bar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            data: [5, '-', '-', 10, 7, 4, 7, 12, 5],
+            itemStyle: {
+              color: 'lightgray'
+            },
+            stack: 'medal',
+          },
+          {
+            name: '铜牌数量',
+            type: 'bar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            data: [3, '-', '-', 5, 2, 15, 1, 5],
+            itemStyle: {
+              color: 'peru'
+            },
+            stack: 'medal'
+          },
+          // 右下角图表的数据
+          {
+            type: 'boxplot',
+            xAxisIndex: 3,
+            yAxisIndex: 3,
+            data: boxData.boxData,
+            // data: boxplotData,
+            tooltip: {
+              show: true,
+              formatter: function (param) {
+                return [
+                  '最大值: ' + param.data[5],
+                  '上四分位数: ' + param.data[4],
+                  '中位数: ' + param.data[3],
+                  '下四分位数: ' + param.data[2],
+                  '最小值: ' + param.data[1]
+                ].join('<br/>');
+              }
+            }
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      gridChart.setOption(option);
+
+    </script>
+  </article>
+
+</body>
+
+</html>

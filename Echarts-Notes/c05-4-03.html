@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.3 省份区域图绘制方法</title>
+  <script src="js/echarts.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <!-- 以 js 文件的方式引入底图，会自动注册地图名字和数据，以下引入了名为 china 的中国矢量地图数据 -->
+  <script type="text/javascript" src="js/china.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside>
+    <div class="top">
+      <a href="#" target="_self">&lt; top</a>
+    </div>
+  </aside>
+
+  <article class="container">
+    <h1>
+      空间面数据图
+    </h1>
+    <p>⚠️ 在可视和空间数据时，需要先加载底图。ECharts 中提供了<a
+        href="https://echarts.apache.org/zh/option.html#geo.map">两种格式的地图数据</a>，一种是可以直接 script 标签引入的 js
+      文件，引入后会自动注册地图名字和数据。还有一种是 JSON 文件，需要通过 AJAX 异步加载后手动注册。</p>
+    <p>💡 可以使用 ECharts 提供的<a href="https://github.com/apache/incubator-echarts/tree/master/extension/bmap"
+        target="_blank">百度地图扩展</a>，将百度地图作为地图。还可以使用<a href="http://lbsyun.baidu.com/img-editor.html"
+        target="_blank">百度地图底图编辑工具</a>定制样式。</p>
+    <hr>
+
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="area" style="height:600px"></div>
+    <script>
+      // 基于准备好的 DOM 初始化 Echarts 实例
+      var area = echarts.init(document.getElementById('area'));
+      // 数据
+      // 每个数据项为一个对象，由于需要将数据映射到基础面区域
+      // name 对应于于矢量地图的省份
+      data1 = [
+        { name: '北京', value: 714.1318644 },
+        { name: '天津', value: 445.8714691 },
+        { name: '上海', value: 734.672288 },
+        { name: '重庆', value: 266.5962616 },
+        { name: '河北', value: 683.550899 },
+        { name: '河南', value: 596.3855676 },
+        { name: '云南', value: 739.1423769 },
+        { name: '辽宁', value: 518.791241 },
+        { name: '黑龙江', value: 948.6741874 },
+        { name: '湖南', value: 631.7461232 },
+        { name: '安徽', value: 106.1949019 },
+        { name: '山东', value: 620.5107811 },
+        { name: '新疆', value: 469.0249375 },
+        { name: '江苏', value: 282.5293962 },
+        { name: '浙江', value: 137.3121373 },
+        { name: '江西', value: 964.7093637 },
+        { name: '湖北', value: 933.5132343 },
+        { name: '广西', value: 713.3703916 },
+        { name: '甘肃', value: 13.45689869 },
+        { name: '山西', value: 998.2400472 },
+        { name: '内蒙古', value: 283.5701976 },
+        { name: '陕西', value: 711.5018387 },
+        { name: '吉林', value: 994.6005285 },
+        { name: '福建', value: 319.8579129 },
+        { name: '贵州', value: 690.7882977 },
+        { name: '广东', value: 668.4663841 },
+        { name: '青海', value: 255.8785339 },
+        { name: '西藏', value: 200.2471621 },
+        { name: '四川', value: 138.8110127 },
+        { name: '宁夏', value: 449.2479343 },
+        { name: '海南', value: 782.7912365 },
+        { name: '台湾', value: 152.6162449 },
+        { name: '香港', value: 859.3378809 },
+        { name: '澳门', value: 765.3008152 }
+      ]
+      data2 = [
+        { name: '北京', value: 549.0693336 },
+        { name: '天津', value: 805.3965017 },
+        { name: '上海', value: 950.3246804 },
+        { name: '重庆', value: 466.0328882 },
+        { name: '河北', value: 61.72230388 },
+        { name: '河南', value: 643.6912717 },
+        { name: '云南', value: 526.7272991 },
+        { name: '辽宁', value: 786.7510119 },
+        { name: '黑龙江', value: 429.379316 },
+        { name: '湖南', value: 292.5983885 },
+        { name: '安徽', value: 595.7089942 },
+        { name: '山东', value: 237.4779806 },
+        { name: '新疆', value: 469.426997 },
+        { name: '江苏', value: 103.6755896 },
+        { name: '浙江', value: 801.3446502 },
+        { name: '江西', value: 955.8876358 },
+        { name: '湖北', value: 493.2856253 },
+        { name: '广西', value: 310.8475315 },
+        { name: '甘肃', value: 490.7279251 },
+        { name: '山西', value: 727.3852833 },
+        { name: '内蒙古', value: 796.876374 },
+        { name: '陕西', value: 430.5584378 },
+        { name: '吉林', value: 282.6093768 },
+        { name: '福建', value: 544.3981732 },
+        { name: '贵州', value: 269.6518468 },
+        { name: '广东', value: 86.77732162 },
+        { name: '青海', value: 870.5973878 },
+        { name: '西藏', value: 596.8678169 },
+        { name: '四川', value: 633.6745972 },
+        { name: '宁夏', value: 106.4372773 },
+        { name: '海南', value: 62.37394909 },
+        { name: '台湾', value: 537.0295211 },
+        { name: '香港', value: 274.5091296 },
+        { name: '澳门', value: 347.0123147 }
+      ]
+
+      // 指定图表的配置项和数据
+      option = {
+        title: {
+          text: '省份数据',
+          top: '2%',
+          left: 'center',
+        },
+        legend: {
+          show: true,
+          top: '8%',
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        visualMap: {
+          min: 0,
+          max: 2500,
+          left: 'right',
+          text: ['高', '低'],
+          calculable: true
+        },
+        // 平面地图数据
+        // 主要用于地理区域数据的可视化，配合 visualMap 组件用于展示不同区域的人口分布密度等数据。
+        // 如果设置了多个地图类型相同的系列，会在同一地图上显示，这时候使用第一个系列的配置项作为地图绘制的配置。
+        series: [
+          // 多个拥有相同地图类型的系列会使用同一个地图展现，如果多个系列都在同一个区域有值，ECharts 会对这些值统计得到一个数据。
+          // 可以通过属性 mapValueCalculation 设置同级方式，默认使用 'sum' 取和
+
+          // 系列一：省份面数据
+          {
+            name: '省份数据一',
+            type: 'map',   // 地图类型数据
+            map: 'china',   // 使用矢量地图 china 作为基础面
+            roam: true,
+            label: {
+              normal: {
+                show: false,
+              },
+              emphasis: {
+                show: true,
+              }
+            },
+            showLegendSymbol: false,
+            data: data1
+          },
+          // 系列二：省份面数据
+          {
+            name: '省份数据二',
+            type: 'map',
+            map: 'china',
+            showLegendSymbol: false,
+            data: data2
+          },
+
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      area.setOption(option);
+    </script>
+
+  </article>
+</body>
+
+</html>

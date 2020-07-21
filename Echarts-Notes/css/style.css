@@ -35,3 +35,11 @@ article ul li {
   list-style-type: circle;
   text-indent: 2em
 }
+
+ul li {
+  padding: 10px;
+}
+
+ul img {
+  padding: 20px 0;
+}

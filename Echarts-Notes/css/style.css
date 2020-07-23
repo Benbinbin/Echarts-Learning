@@ -36,10 +36,11 @@ article ul li {
   text-indent: 2em
 }
 
-ul li {
+ul li, ol li {
   padding: 10px;
 }
 
-ul img {
+ul img, ol img {
   padding: 20px 0;
+  width: 100%;
 }

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.5 3D 地图 POI 数据可视化</title>
+  <!-- 使用 WebGL 构建 3D 可视化项目时需要导入 echarts-gl -->
+  <script src="js/echarts.js"></script>
+  <script src="js/echarts-gl.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <!-- 引入 mapbox，自动注册为 ECharts 的底图 -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside>
+    <div class="top">
+      <a href="#" target="_self">&lt; top</a>
+    </div>
+  </aside>
+
+  <article class="container">
+    <h1>3D 地图 POI 数据可视化</h1>
+    <p>使用 <a href="https://www.mapbox.com/" target="_blank">Mapbox</a> 作为图资。</p>
+    <ol>
+      <li>在 <a href="https://www.mapbox.com/" target="_blank">Mapbox</a> 官网申请账号，并定制底图样式和获取 token。
+        <img src="images/mapbox.png" alt=""></li>
+      <li>定制样式
+        <img src="images/mapbox_style.png" alt="">
+        <img src="images/mapbox_style_setting.png" alt="">
+      </li>
+      <li>获取样式链接 <code>Style URL</code>
+        <img src="images/mapbox_style_URL.png" alt="">
+      </li>
+      <li>申请地图应用 token
+        <img src="images/mapbox_token.png" alt="">
+      </li>
+    </ol>
+    <p>💡 如果要优化地图在中国地区的访问速度可以使用 <a href="https://www.mapbox.cn/" target="_blank">Mapbox 中国</a> 提供的服务 </p>
+    <!-- 为ECharts准备一个具备大小（宽高）的 DOM -->
+    <div id="poi" style="height:800px"; margin-bottom: 50px></div>
+    <!-- 引入数据  -->
+    <!-- 数据源为：c05-5-05-template/data.xlsx -->
+    <script src="c05-5-05-template/data/data.js"></script>
+    <!-- 引入地图和 ECharts 相关配置项 -->
+    <script src="c05-5-05-template/set/settings.js"></script>
+
+    <script>
+      // 基于准备好的 DOM 初始化 Echarts 实例
+      let poi = echarts.init(document.getElementById('poi'));
+      // mapbox 的 token 设置
+      mapboxgl.accessToken = mapAccessToken;
+
+      // 数据进行转换
+      function convert(data) {
+        let res = [];
+        for (let i = 0; i < data.length; i++) {
+          res.push({
+            name: data[i][3],
+            value: [data[i][0], data[i][1], data[i][2]]
+          })
+        }
+        return res;
+      }
+
+      let convertData = convert(data);
+
+      // 获取数据中 value 最高值
+      var theMax = 0;
+      convertData.map(function (item) {
+        theMax = Math.max(theMax, item.value[2]);
+      })
+
+      // 指定图表的配置项和数据
+      option = {
+        visualMap: {
+          show: true,
+          inRange: {
+            color: colorRamp
+          },
+          outOfRange: {
+            colorAlpha: 0
+          },
+          max: theMax,
+        },
+        // 基于 mapbox-gl-js 的地理组件。支持在 mapbox 的地图上绘制三维的散点图，飞线图，柱状图和地图。你可以利用 Mapbox 强大的地图服务和 ECharts GL 丰富的可视化和渲染效果实现你想要的可视化作品。
+        // 在使用 mapbox 组件之前你需要先在 <head> 标签中通过 <script> 脚本引入 mapbox 的官方 sdk
+        mapbox: {
+          center: theCenter,
+          zoom: theZoom,
+          pitch: thePitch,
+          bearing: theBear,
+          style: mapStyle,
+          boxHeight: 20,
+          // altitudeScale: 3e2,
+          postEffect: {
+            enable: true,
+            // 屏幕空间的环境光遮蔽效果
+            SSAO: {
+              enable: true,
+              radius: 2,
+              intensity: 1.5
+            }
+          },
+          light: {
+            main: {
+              intensity: 0.5,
+              shadow: theShadow,
+              shadowQuality: 'high',
+              alpha: theAlpha,
+              beta: theBeta
+            },
+            ambient: {
+              intensity: 0.2
+            },
+            ambientCubemap: {
+              // texture: '/asset/get/s/data-1491896094618-H1DmP-5px.hdr',
+              exposure: 1,
+              diffuseIntensity: 0.5
+            }
+          }
+        },
+        series: [{
+          type: 'bar3D',   // 三维柱状图数据类型
+          shading: 'realistic',
+          coordinateSystem: 'mapbox',   // 使用 mapbox 地理组件作为坐标系
+          bevelSize: barCorner,
+          barSize: barSize,
+          silent: true,
+          data: convertData,   // 三维柱状图数据数组。数组每一项为一个数据。在 geo3D 以及 globe 中，每一项的前两个值分别是经纬度 lng, lat，第三个值表示数值大小
+          // 有些时候我们需要指定每个数据项的名称，这时候需要每个项为一个对象（如该实例中数据结构就是使用对象数组）
+          itemStyle: {
+            opacity: theOpac
+          }
+        }]
+      }
+      // 使用刚指定的配置项和数据显示图表
+      poi.setOption(option);
+    </script>
+  </article>
+</body>
+
+</html>

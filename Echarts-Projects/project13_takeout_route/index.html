@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Takeout Route Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div id="route" style="height:500px;"></div>
+  <!-- 以 js 文件的方式引入百度地图作为底图，会自动注册地图名为 bmap 的底图-->
+  <!-- bmap 是 Echarts 提供的百度地图组件，需要先在百度地图开发者平台申请 ak。参考教程：https://github.com/apache/incubator-echarts/tree/master/extension/bmap -->
+  <!-- 引入百度地图的 jssdk，这里需要使用你在百度地图开发者平台申请的 ak -->
+  <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ijcZgo4mUOmgDSc3GhQcAuFfg9nbAjPF"></script> -->
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=L1gyDQb7Dx8YpXVcVly71IHK8GfpCV9d"></script>
+  <!-- 引入百度地图扩展 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/extension/bmap.min.js"></script>
+  <!-- 引入轨迹图的可视化参数设置 -->
+  <script src="set/settings.js"></script>
+  <!-- 引入数据 -->
+  <script src="data/data.js"></script>
+
+  <script>
+    // 基于准备好的 DOM 初始化 Echarts 实例
+    var route = echarts.init(document.getElementById('route'));
+
+    // 设置路线样式
+    if (colorOrWidth == 0) {
+      var lines2 = data.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates
+        }
+      })
+    };
+
+    if (colorOrWidth == 1) {
+      var lines2 = data.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            normal: {
+              color: theColorRamp[theD.properties.value - 1],
+            }
+          }
+        }
+      })
+    }
+
+    if (colorOrWidth == 2) {
+      var lines2 = data.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            normal: {
+              width: theD.properties.value * theWidthRatio,
+            }
+          }
+        }
+      })
+    }
+
+    if (colorOrWidth == 3) {
+      var lines2 = data.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            normal: {
+              color: theColorRamp[theD.properties.value - 1],
+              width: theD.properties.value * theWidthRatio
+            }
+          }
+        }
+      })
+    }
+
+    // 指定图表的配置项和数据
+    // 大部分的设置都读取模板中 settings.js 变量
+    option = {
+      // 地图样式
+      bmap: {
+        center: theCenter,
+        zoom: theZoom,
+        roam: true,
+        mapStyle: {
+          'styleJson': mapStyle
+        }
+      },
+      series: [
+        // 静态路线
+        {
+          type: 'lines',
+          coordinateSystem: 'bmap',
+          polyline: true,
+          data: lines2,
+          silent: true,
+          lineStyle: {
+            normal: {
+              color: theColor,
+              opacity: theOpac,
+              width: theWidth
+            }
+          },
+          progressiveThreshold: 500,
+          progressive: 200
+        },
+        // 动效
+        {
+          type: 'lines',
+          coordinateSystem: 'bmap',
+          polyline: true,
+          data: lines2,
+          lineStyle: {
+            normal: {
+              width: 0
+            }
+          },
+          effect: {
+            period: thePeriod,
+            constantSpeed: theSpeed,
+            show: effectShow,
+            trailLength: theEffLength,
+            symbolSize: theEffWidth
+          },
+          zlevel: 1
+        }]
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    route.setOption(option);
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cities Investment Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 以 js 文件的方式引入百度地图作为底图，会自动注册地图名为 bmap 的底图-->
+  <!-- bmap 是 Echarts 提供的百度地图组件，需要先在百度地图开发者平台申请 ak。参考教程：https://github.com/apache/incubator-echarts/tree/master/extension/bmap -->
+  <!-- 引入百度地图的 jssdk，这里需要使用你在百度地图开发者平台申请的 ak -->
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ijcZgo4mUOmgDSc3GhQcAuFfg9nbAjPF"></script>
+  <!-- 引入百度地图扩展 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/extension/bmap.min.js"></script>
+  <!-- 引入百度地图样式设置 -->
+  <script src="set/settings.js"></script>
+
+  <!-- 引入数据 -->
+  <!-- 城市点数据 -->
+  <script src="data/cities.js"></script>
+  <!-- 投资关系线数据 -->
+  <script src="data/investment.js"></script>
+
+  <div id="investment"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 Echarts 实例
+    var investment = echarts.init(document.getElementById('investment'));
+
+    // 转换数据
+    // 将二维数组中每一个元素转换为一个对象，方便后续使用时按照对象属性提取数据
+    function convertPoints(d) {
+      var res = [];
+      for (var i = 0; i < d.length; i++) {
+        res.push({
+          name: d[i][0],
+          value: [d[i][1], d[i][2]]
+        });
+      }
+      return res;
+    }
+
+    function convertLines(d) {
+      var res = [];
+      for (var i = 0; i < d.length; i++) {
+        res.push({
+          fromName: d[i][0],
+          toName: d[i][1],
+          coords: [[d[i][2], d[i][3]], [d[i][4], d[i][5]]]
+        });
+      }
+      return res;
+    }
+
+    var c1 = convertPoints(cities);
+    var m1 = convertLines(lines);
+
+    // 指定图表的配置项和数据
+    option = {
+      legend: {
+        show: true,
+        top: '8%',
+        left: 'center',
+        data: ['地点', '线路'],
+        textStyle: {
+          color: '#fff'
+        }
+      },
+      // 地图样式
+      bmap: {
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+          'styleJson': mapStyle
+        }
+      },
+      series: [
+        // 系列一：城市点数据
+        {
+          name: '地点',
+          type: 'effectScatter',
+          coordinateSystem: 'bmap',
+          zlevel: 1,
+          rippleEffect: {
+            brushType: 'stroke'
+          },
+          label: {
+            emphasis: {
+              show: true,
+              position: 'right',
+              formatter: '{b}'
+            }
+          },
+          symbolSize: 3,
+          itemStyle: {
+            color: 'yellow'
+          },
+          data: c1
+        },
+        // 系列二：连线数据
+        {
+          name: '线路',
+          type: 'lines',
+          coordinateSystem: 'bmap',
+          zlevel: 2,
+          large: true,
+          lineStyle: {
+            normal: {
+              color: 'red',
+              width: 0.5,
+              opacity: 0.1,
+              curveness: 0.2
+            }
+          },
+          data: m1
+        }
+      ]
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    investment.setOption(option);
+  </script>
+</body>
+
+</html>

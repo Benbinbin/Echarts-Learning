@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart City</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <!-- 使用 WebGL 构建 3D 可视化项目时需要导入 echarts-gl -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts-gl@1.1.1/dist/echarts-gl.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <!-- 引入 mapbox 自动注册为 ECharts 的底图 -->
+  <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@1.9.1/dist/mapbox-gl.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 引入数据 -->
+  <!-- 面数据 -->
+  <script src="data/buildings.js"></script>
+  <!-- 线数据 -->
+  <script src="data/road.js"></script>
+  <!-- 客流量数据 -->
+  <script src="data/passenger_flows.js"></script>
+  <!-- 消费数据 -->
+  <script src="data/consumer.js"></script>
+
+  <!-- 引入图表样式设置 -->
+  <script src="set/settings.js"></script>
+
+  <div id="chart"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 Echarts 实例
+    let chart = echarts.init(document.getElementById('chart'));
+
+    // mapbox 的 token 设置
+    mapboxgl.accessToken = mapAccessToken;
+
+    echarts.registerMap('buildings', building);
+
+    var regionsData = building.features.map(function (feature) {
+      return {
+        name: feature.properties.name,
+        value: feature.properties.value,
+        height: feature.properties.height
+      };
+    });
+
+    if (colorOrWidth == 0) {
+      var dataAll = routes.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            color: theColor,
+            width: theWidth,
+            opacity: theOpac
+          }
+        }
+      })
+    };
+
+    if (colorOrWidth == 1) {
+      var dataAll = routes.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            color: theColorRamp[theD.properties.value - 1],
+            width: theWidth,
+            opacity: theOpac
+          }
+        }
+      })
+    }
+
+    if (colorOrWidth == 2) {
+      var dataAll = routes.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            width: theD.properties.value * theWidthRatio,
+            color: theColor,
+            opacity: theOpac
+          }
+        }
+      })
+    }
+
+    if (colorOrWidth == 3) {
+      var dataAll = routes.features.map(function (theD) {
+        return {
+          coords: theD.geometry.coordinates,
+          lineStyle: {
+            color: theColorRamp[theD.properties.value - 1],
+            width: theD.properties.value * theWidthRatio,
+            opacity: theOpac
+          }
+        }
+      })
+    }
+
+    // 指定图表的配置项和数据
+    option = {
+      title: {
+        text: '智慧城市数据监测大屏',
+        textStyle: {
+          fontSize: 50,
+          color: '#d1d0d0'
+        },
+        top: '3%',
+        left: '1%'
+      },
+      grid: [
+        { left: '6%', bottom: '3%', width: '30%', height: '70%' },
+        { right: '5%', bottom: '5%', width: '50%', height: '35%' }
+      ],
+
+      xAxis: [
+        {
+          show: false,
+          gridIndex: 0,
+          type: 'value'
+        },
+        {
+          gridIndex: 1,
+          name: '消费金额￥',
+          nameLocation: 'start',
+          nameTextStyle: {
+            color: '#d1d0d0'
+          },
+          axisLabel: {
+            show: true,
+            color: '#d1d0d0'
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#d1d0d0'
+            }
+          },
+          splitLine: {
+            show: false
+          },
+          min: 1500,
+          max: 4800
+        },
+      ],
+      yAxis: [
+        {
+          name: '西湖人口流量数据',
+          nameTextStyle: {
+            fontSize: 15,
+            color: '#d1d0d0'
+          },
+          gridIndex: 0,
+          type: 'category',
+          position: 'left',
+          axisLabel: {
+            color: '#d1d0d0'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#d1d0d0'
+            }
+          },
+        },
+        {
+          gridIndex: 1,
+          name: '住宿金额￥',
+          nameTextStyle: {
+            color: '#d1d0d0'
+          },
+          nameLocation: 'end',
+          position: 'right',
+          axisLabel: {
+            color: '#d1d0d0'
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#d1d0d0'
+            }
+          },
+          splitLine: {
+            show: false
+          },
+          min: 100
+        },
+      ],
+      mapbox: {
+        center: theCenter,
+        zoom: theZoom,
+        pitch: thePitch,
+        bearing: theBear,
+        style: mapStyle,
+        postEffect: {
+          enable: true,
+          screenSpaceAmbientOcclusion: {
+            enable: true,
+            intensity: 1.2,
+            radius: 6,
+            quality: 'high'
+          },
+        },
+        light: {
+          main: {
+            intensity: 1,
+            shadow: true,
+            shadowQuality: 'high'
+          },
+          ambient: {
+            intensity: 0.1
+          },
+          ambientCubemap: {
+            texture: theAC,
+            exposure: 1,
+            diffuseIntensity: 0.5,
+            specularIntensity: 2
+          }
+        }
+      },
+      series: [{
+        type: 'map3D',
+        coordinateSystem: 'mapbox',
+        map: 'buildings',
+        data: regionsData,
+        shading: 'realistic',
+        instancing: true,
+        silent: true,
+
+        realisticMaterial: {
+          detailTexture: theDT,
+          metalness: theMetal,
+          roughness: theRough
+        }
+      },
+      {
+        type: 'lines3D',
+        effect: {
+          show: effectShow,
+          constantSpeed: theSpeed,
+          trailWidth: theEffWidth,
+          trailLength: theEffLength,
+          trailOpacity: theEffOpac
+        },
+        coordinateSystem: 'mapbox',
+        blendMode: 'lighter',
+        polyline: true,
+        lineStyle: {
+          color: theColor,
+          width: theWidth,
+          opacity: theOpac
+        },
+        data: dataAll
+      },
+      {
+        name: '西湖游客流量',
+        type: 'bar',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
+        data: passenger_flow,
+        itemStyle: {
+          color: '#d1d0d0'
+        }
+      },
+      {
+        name: '游客消费数据',
+        type: 'scatter',
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        data: consumer,
+        itemStyle: {
+          color: '#d1d0d0'
+        },
+      }
+      ]
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    chart.setOption(option);
+  </script>
+</body>
+
+</html>

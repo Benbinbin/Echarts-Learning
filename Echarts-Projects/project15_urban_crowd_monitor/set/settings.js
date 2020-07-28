@@ -11,7 +11,6 @@ var theBear = 270; // 地图旋转角度，正北为0，正东为90，正西为2
 var thePitch = 30; // 地图俯瞰角度，0为顶视图，60以上效果甚微
 
 // 设置 mapbox 参数
-// var mapStyle = 'mapbox://styles/benbinbin/ckd58prfu03ei1iqe7vuze764'; // 底图样式
 var mapStyle = 'mapbox://styles/yipeiz/cjb788d051eue2rp5hhq2jw2h'; // 底图样式
 var mapAccessToken = 'pk.eyJ1IjoiYmVuYmluYmluIiwiYSI6ImNrZDU4aGZvZTAzNW0zMnQxcWtsZGhsYTQifQ.2aH_JPLLwMABzcaa5_Rr0w'; // 地图 token
 

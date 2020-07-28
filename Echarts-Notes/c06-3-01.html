@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.1 桑基图</title>
+  <!-- 使用 WebGL 构建 3D 可视化项目时需要导入 echarts-gl -->
+  <script src="js/echarts.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside>
+    <div class="top">
+      <a href="#" target="_self">&lt; top</a>
+    </div>
+  </aside>
+
+  <article class="container">
+    <h1>Sankey 图</h1>
+    <p>桑基图是一种特殊的流程图，其中箭头的宽度与流量成比例，可以直观地显示数据流动、分配的情况。它们通常用于可视化流程之间的能源或材料或成本转移。桑基图将视觉重点放在系统内的主要部分的转移或流动上，有助于确定对总体流动的主要贡献。
+    </p>
+
+    <div id="sankey" style="height:600px;margin-bottom: 50px"></div>
+
+
+    <script>
+      // 基于准备好的 DOM 初始化 Echarts 实例
+      let sankey = echarts.init(document.getElementById('sankey'));
+
+      // 指定图表的配置项和数据
+      option = {
+        tooltip: {},
+        series: {
+          type: 'sankey',   // 桑基图数据类型
+          focusNodeAdjacency: 'allEdges',   // 鼠标 hover 到节点或边上，相邻接的节点和边高亮的交互，默认关闭，可手动开启。
+          // 'allEdges'：hover 到节点时，与节点邻接的所有边以及边对应的节点全部高亮。hover 到边时，边和相邻节点高亮。
+          // 'outEdges'：hover 的节点、节点的出边、出边邻接的另一节点 会被高亮。hover 到边时，边和相邻节点高亮。
+          // 'inEdges'：hover 的节点、节点的入边、入边邻接的另一节点 会被高亮。hover 到边时，边和相邻节点高亮。
+          // Node 桑基图节点数据列表
+          nodeWidth: 50,   // 桑基图中每个矩形节点的宽度
+          nodeGap: 50,   // 桑基图中每一列任意两个矩形节点之间的间隔
+          // draggable: false,   // 控制节点拖拽的交互，默认开启
+          lineStyle: {
+            color: 'source'   // 基于源节点的颜色设置边的颜色样式
+          },
+          data: [
+            {
+              name: 'a'
+            },
+            {
+              name: 'b'
+            },
+            {
+              name: 'a1'
+            },
+            {
+              name: 'a2'
+            },
+            {
+              name: 'b1'
+            },
+            {
+              name: 'c'
+            }
+          ],
+          // Edge 桑基图节点间的边（可以添加权重值）
+          // 注意: 桑基图理论上只支持有向无环图（DAG, Directed Acyclic Graph），所以请确保输入的边是无环的
+          links: [
+            {
+              source: 'a',   // 边的源节点名称
+              target: 'a1',   // 边的目标节点名称
+              value: 5   // 连接权重值，使用边的宽度作为映射的视觉元素
+            },
+            {
+              source: 'a',
+              target: 'a2',
+              value: 3
+            },
+            {
+              source: 'b',
+              target: 'b1',
+              value: 8
+            },
+            {
+              source: 'a',
+              target: 'b1',
+              value: 3
+            },
+            {
+              source: 'b1',
+              target: 'a1',
+              value: 1
+            },
+            {
+              source: 'b1',
+              target: 'c',
+              value: 2
+            }
+          ]
+        }
+      }
+      // 使用刚指定的配置项和数据显示图表
+      sankey.setOption(option);
+    </script>
+  </article>
+</body>
+
+</html>

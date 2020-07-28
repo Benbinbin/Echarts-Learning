@@ -14,6 +14,7 @@
     img {
       width: 5%
     }
+
     article {
       margin-bottom: 50px;
     }
@@ -38,22 +39,22 @@
               可视化项目
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item"
-                href="Echarts-Projects/project09_line_chart/index.html" target="_blank">个人消费结余数据可视化</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project10_calendar_chart/index.html" target="_blank">健身数据可视化</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project11_candlestick_chart/index.html" target="_blank">异步数据加载生成K线图</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project12_grid/index.html" target="_blank">奥运会运动员数据多系列图表</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project13_takeout_route/index.html" target="_blank">深圳市多名外卖员轨迹数据可视化</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project14_investment/index.html" target="_blank">城际企业投资关系网络可视化</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project15_urban_crowd_monitor/" target="_blank">城市人口热力点数据可视化</a>
-              <a class="dropdown-item"
-                href="Echarts-Projects/project16_smart_city/index.html" target="_blank">智慧城市数据监测大屏</a>
+              <a class="dropdown-item" href="Echarts-Projects/project09_line_chart/index.html"
+                target="_blank">个人消费结余数据可视化</a>
+              <a class="dropdown-item" href="Echarts-Projects/project10_calendar_chart/index.html"
+                target="_blank">健身数据可视化</a>
+              <a class="dropdown-item" href="Echarts-Projects/project11_candlestick_chart/index.html"
+                target="_blank">异步数据加载生成K线图</a>
+              <a class="dropdown-item" href="Echarts-Projects/project12_grid/index.html"
+                target="_blank">奥运会运动员数据多系列图表</a>
+              <a class="dropdown-item" href="Echarts-Projects/project13_takeout_route/index.html"
+                target="_blank">深圳市多名外卖员轨迹数据可视化</a>
+              <a class="dropdown-item" href="Echarts-Projects/project14_investment/index.html"
+                target="_blank">城际企业投资关系网络可视化</a>
+              <a class="dropdown-item" href="Echarts-Projects/project15_urban_crowd_monitor/"
+                target="_blank">城市人口热力点数据可视化</a>
+              <a class="dropdown-item" href="Echarts-Projects/project16_smart_city/index.html"
+                target="_blank">智慧城市数据监测大屏</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -67,6 +68,7 @@
               <a class="dropdown-item" href="#interact">动态交互</a>
               <a class="dropdown-item" href="#geo">空间图表</a>
               <a class="dropdown-item" href="#webgl">WebGL</a>
+              <a class="dropdown-item" href="#hierarchical_network">层次关系网络数据可视化</a>
             </div>
           </li>
           <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
@@ -320,18 +322,19 @@
         <p class="card-text">数据区域缩放组件 <code>dataZoom</code> 有 3 种类型：</p>
         <ul>
           <li>
-            <a
-              href="https://echarts.apache.org/zh/option.html#dataZoom-inside" target="_blank">内置型数据区域缩放组件（dataZoomInside）</a>：内置于坐标系中，使用户可以在坐标系上通过鼠标拖拽、鼠标滚轮、手指滑动（触屏上）来缩放或漫游坐标系。
+            <a href="https://echarts.apache.org/zh/option.html#dataZoom-inside"
+              target="_blank">内置型数据区域缩放组件（dataZoomInside）</a>：内置于坐标系中，使用户可以在坐标系上通过鼠标拖拽、鼠标滚轮、手指滑动（触屏上）来缩放或漫游坐标系。
           </li>
           <li>
-            <a
-              href="https://echarts.apache.org/zh/option.html#dataZoom-slider" target="_blank">滑动条型数据区域缩放组件（dataZoomSlider）</a>：有单独的滑动条，用户在滑动条上进行缩放或漫游。<strong>（PC
+            <a href="https://echarts.apache.org/zh/option.html#dataZoom-slider"
+              target="_blank">滑动条型数据区域缩放组件（dataZoomSlider）</a>：有单独的滑动条，用户在滑动条上进行缩放或漫游。<strong>（PC
               端主要设置该方式）</strong>
           </li>
           <li>
-            <a
-              href="https://echarts.apache.org/zh/option.html#toolbox.feature.dataZoom" target="_blank">框选型数据区域缩放组件（dataZoomSelect）</a>：提供一个选框进行数据区域缩放。即
-            <a href="https://echarts.apache.org/zh/option.html#toolbox.feature.dataZoom" target="_blank">toolbox.feature.dataZoom</a>，配置项在 <code class="codespan">toolbox</code>
+            <a href="https://echarts.apache.org/zh/option.html#toolbox.feature.dataZoom"
+              target="_blank">框选型数据区域缩放组件（dataZoomSelect）</a>：提供一个选框进行数据区域缩放。即
+            <a href="https://echarts.apache.org/zh/option.html#toolbox.feature.dataZoom"
+              target="_blank">toolbox.feature.dataZoom</a>，配置项在 <code class="codespan">toolbox</code>
             中。
           </li>
         </ul>
@@ -347,10 +350,12 @@
                 target="_blank">single.tooltip</a></p>
           </li>
           <li>
-            <p>可以设置在系列中，即 <a href="https://echarts.apache.org/zh/option.html#series.tooltip" target="_blank">series.tooltip</a></p>
+            <p>可以设置在系列中，即 <a href="https://echarts.apache.org/zh/option.html#series.tooltip"
+                target="_blank">series.tooltip</a></p>
           </li>
           <li>
-            <p>可以设置在系列的每个数据项中，即 <a href="https://echarts.apache.org/zh/option.html#series.data.tooltip" target="_blank">series.data.tooltip</a></p>
+            <p>可以设置在系列的每个数据项中，即 <a href="https://echarts.apache.org/zh/option.html#series.data.tooltip"
+                target="_blank">series.data.tooltip</a></p>
           </li>
         </ul>
         <a href="Echarts-Notes/c03-6-02.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
@@ -413,12 +418,13 @@
     </div>
 
     <h1 id="webgl">WebGL</h1>
-    <p>
-      <a
-        href="https://echarts.apache.org/zh/tutorial.html#%E4%BD%BF%E7%94%A8%20ECharts%20GL%20%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80%E7%9A%84%E4%B8%89%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96" target="_blank">ECharts
+    <p><a
+        href="https://echarts.apache.org/zh/tutorial.html#%E4%BD%BF%E7%94%A8%20ECharts%20GL%20%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80%E7%9A%84%E4%B8%89%E7%BB%B4%E5%8F%AF%E8%A7%86%E5%8C%96"
+        target="_blank">ECharts
         GL</a> 为 ECharts 补充了丰富的三维可视化组件，GL 的配置项完全是按照 ECharts 的标准和上手难度来设计的。GL 以扩展包的形式提供，和诸如水球图这样的扩展类似，如果要使用 GL
       里的各种组件，只需要在引入 <code>echarts.min.js</code> 的基础上再引入一个
-      <code>echarts-gl.min.js</code>。可以从<a href="https://echarts.apache.org/zh/download.html" target="_blank">官网</a>下载最新版的
+      <code>echarts-gl.min.js</code>。可以从<a href="https://echarts.apache.org/zh/download.html"
+        target="_blank">官网</a>下载最新版的
       GL，然后在页面中通过标签引入。</p>
 
     <div class="card">
@@ -426,7 +432,8 @@
         3D 球面轨迹图
       </div>
       <div class="card-body">
-        <p class="card-text">使用 EChart <a href="https://echarts.apache.org/zh/option-gl.html#globe" target="_blank">globe</a>
+        <p class="card-text">使用 EChart <a href="https://echarts.apache.org/zh/option-gl.html#globe"
+            target="_blank">globe</a>
           地球组件展示线数据，绘制 3D 飞线图。</p>
         <a href="Echarts-Notes/c05-5-01.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
       </div>
@@ -437,7 +444,8 @@
         3D 柱状图
       </div>
       <div class="card-body">
-        <p class="card-text">使用 EChart <a href="https://echarts.apache.org/zh/option-gl.html#grid3D" target="_blank">grid3D</a> 三维笛卡尔坐标系组件绘制 3D 柱状图。</p>
+        <p class="card-text">使用 EChart <a href="https://echarts.apache.org/zh/option-gl.html#grid3D"
+            target="_blank">grid3D</a> 三维笛卡尔坐标系组件绘制 3D 柱状图。</p>
         <a href="Echarts-Notes/c05-5-02.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
       </div>
     </div>
@@ -447,7 +455,9 @@
         3D 散点图/气泡图
       </div>
       <div class="card-body">
-        <p class="card-text">ECharts 4 开始支持了 <a href="https://echarts.apache.org/zh/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE" target="_blank">数据集（dataset）组件</a> 用于单独的数据集声明，从而数据可以单独管理，被多个组件复用，并且可以自由指定数据到视觉的映射。</p>
+        <p class="card-text">ECharts 4 开始支持了 <a
+            href="https://echarts.apache.org/zh/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE"
+            target="_blank">数据集（dataset）组件</a> 用于单独的数据集声明，从而数据可以单独管理，被多个组件复用，并且可以自由指定数据到视觉的映射。</p>
         <a href="Echarts-Notes/c05-5-03.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
       </div>
     </div>
@@ -457,7 +467,9 @@
         3D 地图 POI 数据可视化
       </div>
       <div class="card-body">
-        <p class="card-text">将 3D 数据映射到地图上。使用 <a href="https://www.mapbox.com/" target="_blank">Mapbox</a> 作为图资，并在 ECharts 中使用 <code>mapbox3D</code> <a href="https://echarts.apache.org/zh/option-gl.html#mapbox3D">基于 mapbox-gl-js 的地理组件</a>。</p>
+        <p class="card-text">将 3D 数据映射到地图上。使用 <a href="https://www.mapbox.com/" target="_blank">Mapbox</a> 作为图资，并在
+          ECharts 中使用 <code>mapbox3D</code> <a href="https://echarts.apache.org/zh/option-gl.html#mapbox3D">基于
+            mapbox-gl-js 的地理组件</a>。</p>
         <a href="Echarts-Notes/c05-5-05.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
       </div>
     </div>
@@ -471,6 +483,19 @@
         <a href="Echarts-Notes/c05-5-06.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
       </div>
     </div>
+
+    <h1 id="hierarchical_network">层次关系网络数据可视化</h1>
+
+    <div class="card">
+      <div class="card-header">
+        桑基图
+      </div>
+      <div class="card-body">
+        <p class="card-text">Sanky 桑基图是一种特殊的流图（可以看作是有向无环图）。 它主要用来表示原材料、能量等如何从最初形式经过中间过程的加工或转化达到最终状态。基于节点和关系据构建一个层级关系的可视化图表。</p>
+        <a href="Echarts-Notes/c06-3-01.html" target="_blank" class="btn btn-outline-primary">详细实例</a>
+      </div>
+    </div>
+
   </article>
 </body>
 

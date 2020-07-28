@@ -11,9 +11,9 @@ var theWidth = 1 // 路线粗细
 var theOpac = 0.1; // 透明度 0-1
 
 // 地图相关
-var theCenter = [120.151087, 30.249492]; // 中心点坐标
+var theCenter = [120.146993, 30.274966]; // 中心点坐标
 var theZoom = 15; //视角远近 数字
-var theBear = 0; // 地图旋转角度，正北为0，正东为90，正西为270，以此类推
+var theBear = 190; // 地图旋转角度，正北为0，正东为90，正西为270，以此类推
 var thePitch = 90; // 地图俯瞰角度，0为顶视图，60以上效果甚微
 
 // 设置 mapbox 参数
@@ -22,10 +22,10 @@ var mapAccessToken = 'pk.eyJ1IjoiYmVuYmluYmluIiwiYSI6ImNrZDU4aGZvZTAzNW0zMnQxcWt
 
 // 动画效果
 var effectShow = true; // 是否展示动画
-var theSpeed = 50; // 尾迹速度
-var theEffWidth = 1; // 尾迹宽度
+var theSpeed = 30; // 尾迹速度
+var theEffWidth = 5; // 尾迹宽度
 var theEffLength = 10; // 尾迹长度
-var theEffOpac = 1; // 尾迹透明度
+var theEffOpac = 0.2; // 尾迹透明度
 
 // 建筑相关
 var theRough = 0.5; // 表面粗糙度

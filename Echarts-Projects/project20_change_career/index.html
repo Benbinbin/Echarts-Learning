@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Career</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://benbinbin.github.io/Echarts-Learning">Echarts Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ml-lg-2"><a href="https://github.com/Benbinbin/Echarts-Learning"><svg height="100%"
+                viewBox="0 0 16 16" version="1.1" width="30">
+                <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div id="sankey"></div>
+
+  <script>
+    // 基于准备好的 DOM 初始化 Echarts 实例
+    let sankey = echarts.init(document.getElementById('sankey'));
+
+    // 数据
+    // 数据源：离职转行岗位流向数据.xlsx
+
+    // 指定图表的配置项和数据
+    option = {
+      title: {
+        text: '转行后工作岗位流向',
+        left: 'center'
+      },
+
+      tooltip: {},
+      series: {
+        type: 'sankey',
+        focusNodeAdjacency: 'allEdges',
+        lineStyle: {
+          color: 'source'
+        },
+        // 节点数据
+        data: [
+          { name: '社交' },
+          { name: '电商' },
+          { name: '金融' },
+          { name: '游戏' },
+          { name: '管理' },
+          { name: '研发' },
+          { name: '市场' },
+          { name: '搜索' },
+          { name: '战略' },
+          { name: '产品' },
+          { name: '电商_' },
+          { name: '金融_' },
+          { name: '企业服务_' },
+          { name: '汽车_' },
+          { name: '生活_' },
+          { name: '文化_' },
+          { name: '医疗_' },
+          { name: '游戏_' }
+        ],
+        // 边数据
+        links: [
+          { source: '社交', target: '电商_', value: 893 },
+          { source: '社交', target: '金融_', value: 1098 },
+          { source: '社交', target: '企业服务_', value: 1153 },
+          { source: '社交', target: '汽车_', value: 712 },
+          { source: '社交', target: '生活_', value: 593 },
+          { source: '社交', target: '文化_', value: 868 },
+          { source: '社交', target: '医疗_', value: 1065 },
+          { source: '社交', target: '游戏_', value: 431 },
+          { source: '电商', target: '电商_', value: 489 },
+          { source: '电商', target: '金融_', value: 490 },
+          { source: '电商', target: '企业服务_', value: 997 },
+          { source: '电商', target: '汽车_', value: 593 },
+          { source: '电商', target: '生活_', value: 1065 },
+          { source: '电商', target: '文化_', value: 854 },
+          { source: '电商', target: '医疗_', value: 1006 },
+          { source: '电商', target: '游戏_', value: 719 },
+          { source: '金融', target: '电商_', value: 496 },
+          { source: '金融', target: '金融_', value: 544 },
+          { source: '金融', target: '企业服务_', value: 683 },
+          { source: '金融', target: '汽车_', value: 804 },
+          { source: '金融', target: '生活_', value: 1094 },
+          { source: '金融', target: '文化_', value: 966 },
+          { source: '金融', target: '医疗_', value: 434 },
+          { source: '金融', target: '游戏_', value: 922 },
+          { source: '游戏', target: '电商_', value: 501 },
+          { source: '游戏', target: '金融_', value: 492 },
+          { source: '游戏', target: '企业服务_', value: 1169 },
+          { source: '游戏', target: '汽车_', value: 983 },
+          { source: '游戏', target: '生活_', value: 1139 },
+          { source: '游戏', target: '文化_', value: 882 },
+          { source: '游戏', target: '医疗_', value: 833 },
+          { source: '游戏', target: '游戏_', value: 476 },
+          { source: '管理', target: '电商_', value: 510 },
+          { source: '管理', target: '金融_', value: 657 },
+          { source: '管理', target: '企业服务_', value: 552 },
+          { source: '管理', target: '汽车_', value: 1006 },
+          { source: '管理', target: '生活_', value: 656 },
+          { source: '管理', target: '文化_', value: 1039 },
+          { source: '管理', target: '医疗_', value: 493 },
+          { source: '管理', target: '游戏_', value: 636 },
+          { source: '研发', target: '电商_', value: 1190 },
+          { source: '研发', target: '金融_', value: 693 },
+          { source: '研发', target: '企业服务_', value: 1075 },
+          { source: '研发', target: '汽车_', value: 584 },
+          { source: '研发', target: '生活_', value: 484 },
+          { source: '研发', target: '文化_', value: 1188 },
+          { source: '研发', target: '医疗_', value: 508 },
+          { source: '研发', target: '游戏_', value: 563 },
+          { source: '市场', target: '电商_', value: 747 },
+          { source: '市场', target: '金融_', value: 567 },
+          { source: '市场', target: '企业服务_', value: 878 },
+          { source: '市场', target: '汽车_', value: 639 },
+          { source: '市场', target: '生活_', value: 765 },
+          { source: '市场', target: '文化_', value: 779 },
+          { source: '市场', target: '医疗_', value: 494 },
+          { source: '市场', target: '游戏_', value: 1018 },
+          { source: '搜索', target: '电商_', value: 735 },
+          { source: '搜索', target: '金融_', value: 683 },
+          { source: '搜索', target: '企业服务_', value: 449 },
+          { source: '搜索', target: '汽车_', value: 770 },
+          { source: '搜索', target: '生活_', value: 887 },
+          { source: '搜索', target: '文化_', value: 537 },
+          { source: '搜索', target: '医疗_', value: 1100 },
+          { source: '搜索', target: '游戏_', value: 633 },
+          { source: '战略', target: '电商_', value: 963 },
+          { source: '战略', target: '金融_', value: 422 },
+          { source: '战略', target: '企业服务_', value: 1066 },
+          { source: '战略', target: '汽车_', value: 1099 },
+          { source: '战略', target: '生活_', value: 701 },
+          { source: '战略', target: '文化_', value: 1182 },
+          { source: '战略', target: '医疗_', value: 483 },
+          { source: '战略', target: '游戏_', value: 631 },
+          { source: '产品', target: '电商_', value: 525 },
+          { source: '产品', target: '金融_', value: 585 },
+          { source: '产品', target: '企业服务_', value: 1146 },
+          { source: '产品', target: '汽车_', value: 1133 },
+          { source: '产品', target: '生活_', value: 1042 },
+          { source: '产品', target: '文化_', value: 631 },
+          { source: '产品', target: '医疗_', value: 931 },
+          { source: '产品', target: '游戏_', value: 1030 }
+        ]
+      }
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    sankey.setOption(option);
+  </script>
+
+</body>
+
+</html>

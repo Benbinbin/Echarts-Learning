@@ -41,7 +41,9 @@
   <script>
     // 基于准备好的 DOM 初始化 Echarts 实例
     let tree = echarts.init(document.getElementById('tree'));
-    // 树图结构数据
+
+    // 数据
+    // 数据源：员工关系数据.xlsx
     var data = {
       name: 'Employees',
       children: [
@@ -421,340 +423,341 @@
     // 基于准备好的 DOM 初始化 Echarts 实例
     let treemap = echarts.init(document.getElementById('treemap'));
 
-    // 树图数据
+    // 数据
+    // 数据源：员工关系数据.xlsx
     let treemapData = [
-        {
-          name: 'King',
-          children: [
-            {
-              name: 'Hill', children:
-                [
-                  { name: 'Cook', value: 100, symbolSize: 12 },
-                  { name: 'Ross', value: 100, symbolSize: 11 },
-                  { name: 'Sims', value: 100, symbolSize: 12 },
-                  { name: 'Soto', value: 100, symbolSize: 12 },
-                  { name: 'Holt', value: 100, symbolSize: 5 },
-                  { name: 'Neal', value: 100, symbolSize: 12 },
-                  { name: 'Bush', value: 100, symbolSize: 14 },
-                  { name: 'Yang', value: 100, symbolSize: 11 },
-                  { name: 'Khan', value: 100, symbolSize: 11 },
-                  { name: 'Pace', value: 100, symbolSize: 10 }
-                ], value: 100, symbolSize: 13
-            },
-            {
-              name: 'Mays', children: [
-                { name: 'Case', value: 100, symbolSize: 5 },
-                { name: 'Pugh', value: 100, symbolSize: 11 },
-                { name: 'Good', value: 100, symbolSize: 13 },
-                { name: 'Ginn', value: 100, symbolSize: 14 },
-                { name: 'Sipe', value: 100, symbolSize: 13 },
-                { name: 'Belk', value: 100, symbolSize: 18 }
-              ], value: 100, symbolSize: 12
-            },
-            {
-              name: 'Bias', children: [
-                { name: 'Folk', value: 100, symbolSize: 14 },
-                { name: 'Rego', value: 100, symbolSize: 6 },
-                { name: 'Tull', value: 100, symbolSize: 11 },
-                { name: 'Karp', value: 100, symbolSize: 11 },
-                { name: 'Dana', value: 100, symbolSize: 11 },
-                { name: 'Syed', value: 100, symbolSize: 8 },
-                { name: 'Mick', value: 100, symbolSize: 10 }
-              ], value: 100, symbolSize: 12
-            },
-            {
-              name: 'Fick', children: [
-                { name: 'Senn', value: 100, symbolSize: 11 },
-                { name: 'Rick', value: 100, symbolSize: 11 },
-                { name: 'Raab', value: 100, symbolSize: 12 },
-                { name: 'Poff', value: 100, symbolSize: 10 },
-                { name: 'Dore', value: 100, symbolSize: 11 },
-                { name: 'Delp', value: 100, symbolSize: 13 },
-                { name: 'Cate', value: 100, symbolSize: 5 }
-              ], value: 100, symbolSize: 17
-            },
-            {
-              name: 'Muth', children: [
-                { name: 'Rusk', value: 100, symbolSize: 5 },
-                { name: 'Diep', value: 100, symbolSize: 16 },
-                { name: 'Gwin', value: 100, symbolSize: 9 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Teng', children: [
-                { name: 'Waid', value: 100, symbolSize: 12 },
-                { name: 'Ocon', value: 100, symbolSize: 13 },
-                { name: 'Wint', value: 100, symbolSize: 14 },
-                { name: 'Vogl', value: 100, symbolSize: 5 },
-                { name: 'Koza', value: 100, symbolSize: 15 },
-                { name: 'Leap', value: 100, symbolSize: 14 },
-                { name: 'Duer', value: 100, symbolSize: 11 },
-                { name: 'Begg', value: 100, symbolSize: 18 },
-                { name: 'Suri', value: 100, symbolSize: 13 },
-                { name: 'Bolz', value: 100, symbolSize: 11 }
+      {
+        name: 'King',
+        children: [
+          {
+            name: 'Hill', children:
+              [
+                { name: 'Cook', value: 100, symbolSize: 12 },
+                { name: 'Ross', value: 100, symbolSize: 11 },
+                { name: 'Sims', value: 100, symbolSize: 12 },
+                { name: 'Soto', value: 100, symbolSize: 12 },
+                { name: 'Holt', value: 100, symbolSize: 5 },
+                { name: 'Neal', value: 100, symbolSize: 12 },
+                { name: 'Bush', value: 100, symbolSize: 14 },
+                { name: 'Yang', value: 100, symbolSize: 11 },
+                { name: 'Khan', value: 100, symbolSize: 11 },
+                { name: 'Pace', value: 100, symbolSize: 10 }
               ], value: 100, symbolSize: 13
-            }], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Done',
-          children: [
-            {
-              name: 'Sago', children: [
-                { name: 'Dano', value: 100, symbolSize: 5 },
-                { name: 'Daul', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 13
-            },
-            {
-              name: 'Mood', children: [
-                { name: 'Nill', value: 100, symbolSize: 10 },
-                { name: 'Tobe', value: 100, symbolSize: 13 },
-                { name: 'Korf', value: 100, symbolSize: 13 },
-                { name: 'Heun', value: 100, symbolSize: 11 },
-                { name: 'Gest', value: 100, symbolSize: 10 },
-                { name: 'Boyt', value: 100, symbolSize: 15 },
-                { name: 'Enge', value: 100, symbolSize: 14 },
-                { name: 'Flis', value: 100, symbolSize: 5 }
-              ], value: 100, symbolSize: 16
-            },
-            {
-              name: 'Albo', children: [
-                { name: 'Sick', value: 100, symbolSize: 12 },
-                { name: 'Reim', value: 100, symbolSize: 10 }
-              ], value: 100, symbolSize: 14
-            },
-            {
-              name: 'Paye', children: [
-                { name: 'Fehl', value: 100, symbolSize: 12 },
-                { name: 'Rief', value: 100, symbolSize: 9 },
-                { name: 'Bram', value: 100, symbolSize: 5 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Nack', children: [
-                { name: 'Base', value: 100, symbolSize: 5 },
-                { name: 'Shiu', value: 100, symbolSize: 11 },
-                { name: 'Blye', value: 100, symbolSize: 9 },
-                { name: 'Kyer', value: 100, symbolSize: 13 },
-                { name: 'Lose', value: 100, symbolSize: 12 },
-                { name: 'Hana', value: 100, symbolSize: 18 },
-                { name: 'Ripa', value: 100, symbolSize: 10 },
-                { name: 'Soon', value: 100, symbolSize: 10 },
-                { name: 'Gola', value: 100, symbolSize: 10 },
-                { name: 'Humm', value: 100, symbolSize: 7 }
-              ], value: 100, symbolSize: 12
-            }
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Brom',
-          children: [
-            {
-              name: 'Fico', children: [
-                { name: 'Keef', value: 100, symbolSize: 8 },
-                { name: 'Rani', value: 100, symbolSize: 16 },
-                { name: 'Tsou', value: 100, symbolSize: 10 },
-                { name: 'Boot', value: 100, symbolSize: 6 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Duey', children: [
-                { name: 'Meer', value: 100, symbolSize: 16 },
-                { name: 'Kall', value: 100, symbolSize: 6 },
-                { name: 'Cira', value: 100, symbolSize: 10 },
-                { name: 'Gehm', value: 100, symbolSize: 13 }
-              ], value: 100, symbolSize: 13
-            },
-            {
-              name: 'Zyla', children: [
-                { name: 'Dern', value: 100, symbolSize: 8 },
-                { name: 'Igou', value: 100, symbolSize: 8 },
-                { name: 'Sari', value: 100, symbolSize: 14 },
-                { name: 'Urey', value: 100, symbolSize: 9 },
-                { name: 'Toso', value: 100, symbolSize: 4 }
-              ], value: 100, symbolSize: 10
-            },
-            {
-              name: 'Gell', children: [
-                { name: 'Inch', value: 100, symbolSize: 4 },
-                { name: 'Soll', value: 100, symbolSize: 5 },
-                { name: 'Kant', value: 100, symbolSize: 8 },
-                { name: 'Nead', value: 100, symbolSize: 14 }
-              ], value: 100, symbolSize: 14
-            }
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Vint',
-          children: [
-            {
-              name: 'Cwik', children: [
-                { name: 'Mank', value: 100, symbolSize: 12 },
-                { name: 'Vian', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 20
-            },
-            {
-              name: 'Dohn', children: [
-                { name: 'Meda', value: 100, symbolSize: 10 },
-                { name: 'Rueb', value: 100, symbolSize: 4 },
-                { name: 'Pall', value: 100, symbolSize: 4 },
-                { name: 'Sahm', value: 100, symbolSize: 13 },
-                { name: 'Goth', value: 100, symbolSize: 11 },
-                { name: 'Stum', value: 100, symbolSize: 17 }
-              ], value: 100, symbolSize: 12
-            },
-            {
-              name: 'Uram', children: [
-                { name: 'Vane', value: 100, symbolSize: 10 },
-                { name: 'Meno', value: 100, symbolSize: 10 },
-                { name: 'Arps', value: 100, symbolSize: 6 }
-              ], value: 100, symbolSize: 16
-            },
-            {
-              name: 'Limb', children: [
-                { name: 'Nong', value: 100, symbolSize: 7 },
-                { name: 'Beus', value: 100, symbolSize: 8 },
-                { name: 'Vite', value: 100, symbolSize: 13 },
-                { name: 'Luka', value: 100, symbolSize: 5 },
-                { name: 'Sooy', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 12
-            },
-            {
-              name: 'Kalk', children: [
-                { name: 'Liem', value: 100, symbolSize: 11 },
-                { name: 'Loor', value: 100, symbolSize: 8 },
-                { name: 'Moan', value: 100, symbolSize: 8 }
-              ], value: 100, symbolSize: 10
-            }
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Obst',
-          children: [
-            {
-              name: 'Teat', children: [
-                { name: 'Prus', value: 100, symbolSize: 4 },
-                { name: 'Sigg', value: 100, symbolSize: 14 },
-                { name: 'Peto', value: 100, symbolSize: 11 },
-                { name: 'Menk', value: 100, symbolSize: 13 },
-                { name: 'Simm', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Essa', children: [
-                { name: 'Hidy', value: 100, symbolSize: 13 },
-                { name: 'Coup', value: 100, symbolSize: 9 },
-                { name: 'Wien', value: 100, symbolSize: 4 },
-                { name: 'Asby', value: 100, symbolSize: 12 },
-                { name: 'Krah', value: 100, symbolSize: 9 },
-                { name: 'Cake', value: 100, symbolSize: 11 },
-                { name: 'Dabb', value: 100, symbolSize: 11 },
-                { name: 'Leeb', value: 100, symbolSize: 8 },
-                { name: 'Pund', value: 100, symbolSize: 8 },
-                { name: 'Fare', value: 100, symbolSize: 12 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Tiso', children: [
-                { name: 'Bees', value: 100, symbolSize: 4 },
-                { name: 'Erno', value: 100, symbolSize: 11 },
-                { name: 'Wroe', value: 100, symbolSize: 10 },
-                { name: 'Dury', value: 100, symbolSize: 12 },
-                { name: 'Kydd', value: 100, symbolSize: 10 },
-                { name: 'Lupu', value: 100, symbolSize: 16 },
-                { name: 'Nary', value: 100, symbolSize: 9 }
-              ], value: 100, symbolSize: 14
-            },
-            {
-              name: 'Njie', children: [
-                { name: 'Tano', value: 100, symbolSize: 9 },
-                { name: 'Gnau', value: 100, symbolSize: 9 },
-                { name: 'Curt', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 13
-            },
-            {
-              name: 'Mers', children: [
-                { name: 'Mesh', value: 100, symbolSize: 10 },
-                { name: 'Lime', value: 100, symbolSize: 13 },
-                { name: 'Nilo', value: 100, symbolSize: 12 },
-                { name: 'Tier', value: 100, symbolSize: 2 },
-                { name: 'Veil', value: 100, symbolSize: 6 },
-                { name: 'Zisk', value: 100, symbolSize: 2 },
-                { name: 'Bava', value: 100, symbolSize: 4 },
-                { name: 'Byle', value: 100, symbolSize: 5 },
-                { name: 'Dush', value: 100, symbolSize: 2 },
-                { name: 'Kiah', value: 100, symbolSize: 4 },
-                { name: 'Kine', value: 100, symbolSize: 10 },
-                { name: 'Guha', value: 100, symbolSize: 5 },
-                { name: 'Husa', value: 100, symbolSize: 12 },
-                { name: 'Kurk', value: 100, symbolSize: 8 },
-                { name: 'Genn', value: 100, symbolSize: 12 }
-              ], value: 100, symbolSize: 12
-            }
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Farb',
-          children: [
-            {
-              name: 'Hayn', children: [
-                { name: 'Hext', value: 100, symbolSize: 11 },
-                { name: 'Hron', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 12
-            },
-            {
-              name: 'Meka', children: [
-                { name: 'Mitz', value: 100, symbolSize: 9 },
-                { name: 'Pach', value: 100, symbolSize: 9 },
-                { name: 'Rawn', value: 100, symbolSize: 11 }
-              ], value: 100, symbolSize: 10
-            },
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Bajo',
-          children: [
-            {
-              name: 'Thoe', children: [
-                { name: 'Tina', value: 100, symbolSize: 10 },
-                { name: 'Bett', value: 100, symbolSize: 5 },
-                { name: 'Depa', value: 100, symbolSize: 10 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Uhle', children: [
-                { name: 'Week', value: 100, symbolSize: 10 },
-                { name: 'Aleo', value: 100, symbolSize: 4 }
-              ], value: 100, symbolSize: 17
-            },
-          ], value: 100, symbolSize: 10
-        },
-        {
-          name: 'Suer',
-          children: [
-            {
-              name: 'Tise', children: [
-                { name: 'Rais', value: 100, symbolSize: 16 },
-                { name: 'Fode', value: 100, symbolSize: 12 },
-                { name: 'Ketz', value: 100, symbolSize: 9 },
-                { name: 'Mare', value: 100, symbolSize: 11 },
-                { name: 'Pase', value: 100, symbolSize: 4 },
-                { name: 'Pule', value: 100, symbolSize: 7 },
-                { name: 'Sana', value: 100, symbolSize: 9 },
-                { name: 'Turo', value: 100, symbolSize: 10 },
-                { name: 'Arbo', value: 100, symbolSize: 10 },
-                { name: 'Rieg', value: 100, symbolSize: 8 }
-              ], value: 100, symbolSize: 11
-            },
-            {
-              name: 'Nimz', children: [
-                { name: 'Zant', value: 100, symbolSize: 11 },
-                { name: 'Deja', value: 100, symbolSize: 9 },
-                { name: 'Heye', value: 100, symbolSize: 15 }
-              ], value: 100, symbolSize: 11
-            }
-          ], value: 100, symbolSize: 10
-        }
-      ]
+          },
+          {
+            name: 'Mays', children: [
+              { name: 'Case', value: 100, symbolSize: 5 },
+              { name: 'Pugh', value: 100, symbolSize: 11 },
+              { name: 'Good', value: 100, symbolSize: 13 },
+              { name: 'Ginn', value: 100, symbolSize: 14 },
+              { name: 'Sipe', value: 100, symbolSize: 13 },
+              { name: 'Belk', value: 100, symbolSize: 18 }
+            ], value: 100, symbolSize: 12
+          },
+          {
+            name: 'Bias', children: [
+              { name: 'Folk', value: 100, symbolSize: 14 },
+              { name: 'Rego', value: 100, symbolSize: 6 },
+              { name: 'Tull', value: 100, symbolSize: 11 },
+              { name: 'Karp', value: 100, symbolSize: 11 },
+              { name: 'Dana', value: 100, symbolSize: 11 },
+              { name: 'Syed', value: 100, symbolSize: 8 },
+              { name: 'Mick', value: 100, symbolSize: 10 }
+            ], value: 100, symbolSize: 12
+          },
+          {
+            name: 'Fick', children: [
+              { name: 'Senn', value: 100, symbolSize: 11 },
+              { name: 'Rick', value: 100, symbolSize: 11 },
+              { name: 'Raab', value: 100, symbolSize: 12 },
+              { name: 'Poff', value: 100, symbolSize: 10 },
+              { name: 'Dore', value: 100, symbolSize: 11 },
+              { name: 'Delp', value: 100, symbolSize: 13 },
+              { name: 'Cate', value: 100, symbolSize: 5 }
+            ], value: 100, symbolSize: 17
+          },
+          {
+            name: 'Muth', children: [
+              { name: 'Rusk', value: 100, symbolSize: 5 },
+              { name: 'Diep', value: 100, symbolSize: 16 },
+              { name: 'Gwin', value: 100, symbolSize: 9 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Teng', children: [
+              { name: 'Waid', value: 100, symbolSize: 12 },
+              { name: 'Ocon', value: 100, symbolSize: 13 },
+              { name: 'Wint', value: 100, symbolSize: 14 },
+              { name: 'Vogl', value: 100, symbolSize: 5 },
+              { name: 'Koza', value: 100, symbolSize: 15 },
+              { name: 'Leap', value: 100, symbolSize: 14 },
+              { name: 'Duer', value: 100, symbolSize: 11 },
+              { name: 'Begg', value: 100, symbolSize: 18 },
+              { name: 'Suri', value: 100, symbolSize: 13 },
+              { name: 'Bolz', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 13
+          }], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Done',
+        children: [
+          {
+            name: 'Sago', children: [
+              { name: 'Dano', value: 100, symbolSize: 5 },
+              { name: 'Daul', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 13
+          },
+          {
+            name: 'Mood', children: [
+              { name: 'Nill', value: 100, symbolSize: 10 },
+              { name: 'Tobe', value: 100, symbolSize: 13 },
+              { name: 'Korf', value: 100, symbolSize: 13 },
+              { name: 'Heun', value: 100, symbolSize: 11 },
+              { name: 'Gest', value: 100, symbolSize: 10 },
+              { name: 'Boyt', value: 100, symbolSize: 15 },
+              { name: 'Enge', value: 100, symbolSize: 14 },
+              { name: 'Flis', value: 100, symbolSize: 5 }
+            ], value: 100, symbolSize: 16
+          },
+          {
+            name: 'Albo', children: [
+              { name: 'Sick', value: 100, symbolSize: 12 },
+              { name: 'Reim', value: 100, symbolSize: 10 }
+            ], value: 100, symbolSize: 14
+          },
+          {
+            name: 'Paye', children: [
+              { name: 'Fehl', value: 100, symbolSize: 12 },
+              { name: 'Rief', value: 100, symbolSize: 9 },
+              { name: 'Bram', value: 100, symbolSize: 5 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Nack', children: [
+              { name: 'Base', value: 100, symbolSize: 5 },
+              { name: 'Shiu', value: 100, symbolSize: 11 },
+              { name: 'Blye', value: 100, symbolSize: 9 },
+              { name: 'Kyer', value: 100, symbolSize: 13 },
+              { name: 'Lose', value: 100, symbolSize: 12 },
+              { name: 'Hana', value: 100, symbolSize: 18 },
+              { name: 'Ripa', value: 100, symbolSize: 10 },
+              { name: 'Soon', value: 100, symbolSize: 10 },
+              { name: 'Gola', value: 100, symbolSize: 10 },
+              { name: 'Humm', value: 100, symbolSize: 7 }
+            ], value: 100, symbolSize: 12
+          }
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Brom',
+        children: [
+          {
+            name: 'Fico', children: [
+              { name: 'Keef', value: 100, symbolSize: 8 },
+              { name: 'Rani', value: 100, symbolSize: 16 },
+              { name: 'Tsou', value: 100, symbolSize: 10 },
+              { name: 'Boot', value: 100, symbolSize: 6 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Duey', children: [
+              { name: 'Meer', value: 100, symbolSize: 16 },
+              { name: 'Kall', value: 100, symbolSize: 6 },
+              { name: 'Cira', value: 100, symbolSize: 10 },
+              { name: 'Gehm', value: 100, symbolSize: 13 }
+            ], value: 100, symbolSize: 13
+          },
+          {
+            name: 'Zyla', children: [
+              { name: 'Dern', value: 100, symbolSize: 8 },
+              { name: 'Igou', value: 100, symbolSize: 8 },
+              { name: 'Sari', value: 100, symbolSize: 14 },
+              { name: 'Urey', value: 100, symbolSize: 9 },
+              { name: 'Toso', value: 100, symbolSize: 4 }
+            ], value: 100, symbolSize: 10
+          },
+          {
+            name: 'Gell', children: [
+              { name: 'Inch', value: 100, symbolSize: 4 },
+              { name: 'Soll', value: 100, symbolSize: 5 },
+              { name: 'Kant', value: 100, symbolSize: 8 },
+              { name: 'Nead', value: 100, symbolSize: 14 }
+            ], value: 100, symbolSize: 14
+          }
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Vint',
+        children: [
+          {
+            name: 'Cwik', children: [
+              { name: 'Mank', value: 100, symbolSize: 12 },
+              { name: 'Vian', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 20
+          },
+          {
+            name: 'Dohn', children: [
+              { name: 'Meda', value: 100, symbolSize: 10 },
+              { name: 'Rueb', value: 100, symbolSize: 4 },
+              { name: 'Pall', value: 100, symbolSize: 4 },
+              { name: 'Sahm', value: 100, symbolSize: 13 },
+              { name: 'Goth', value: 100, symbolSize: 11 },
+              { name: 'Stum', value: 100, symbolSize: 17 }
+            ], value: 100, symbolSize: 12
+          },
+          {
+            name: 'Uram', children: [
+              { name: 'Vane', value: 100, symbolSize: 10 },
+              { name: 'Meno', value: 100, symbolSize: 10 },
+              { name: 'Arps', value: 100, symbolSize: 6 }
+            ], value: 100, symbolSize: 16
+          },
+          {
+            name: 'Limb', children: [
+              { name: 'Nong', value: 100, symbolSize: 7 },
+              { name: 'Beus', value: 100, symbolSize: 8 },
+              { name: 'Vite', value: 100, symbolSize: 13 },
+              { name: 'Luka', value: 100, symbolSize: 5 },
+              { name: 'Sooy', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 12
+          },
+          {
+            name: 'Kalk', children: [
+              { name: 'Liem', value: 100, symbolSize: 11 },
+              { name: 'Loor', value: 100, symbolSize: 8 },
+              { name: 'Moan', value: 100, symbolSize: 8 }
+            ], value: 100, symbolSize: 10
+          }
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Obst',
+        children: [
+          {
+            name: 'Teat', children: [
+              { name: 'Prus', value: 100, symbolSize: 4 },
+              { name: 'Sigg', value: 100, symbolSize: 14 },
+              { name: 'Peto', value: 100, symbolSize: 11 },
+              { name: 'Menk', value: 100, symbolSize: 13 },
+              { name: 'Simm', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Essa', children: [
+              { name: 'Hidy', value: 100, symbolSize: 13 },
+              { name: 'Coup', value: 100, symbolSize: 9 },
+              { name: 'Wien', value: 100, symbolSize: 4 },
+              { name: 'Asby', value: 100, symbolSize: 12 },
+              { name: 'Krah', value: 100, symbolSize: 9 },
+              { name: 'Cake', value: 100, symbolSize: 11 },
+              { name: 'Dabb', value: 100, symbolSize: 11 },
+              { name: 'Leeb', value: 100, symbolSize: 8 },
+              { name: 'Pund', value: 100, symbolSize: 8 },
+              { name: 'Fare', value: 100, symbolSize: 12 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Tiso', children: [
+              { name: 'Bees', value: 100, symbolSize: 4 },
+              { name: 'Erno', value: 100, symbolSize: 11 },
+              { name: 'Wroe', value: 100, symbolSize: 10 },
+              { name: 'Dury', value: 100, symbolSize: 12 },
+              { name: 'Kydd', value: 100, symbolSize: 10 },
+              { name: 'Lupu', value: 100, symbolSize: 16 },
+              { name: 'Nary', value: 100, symbolSize: 9 }
+            ], value: 100, symbolSize: 14
+          },
+          {
+            name: 'Njie', children: [
+              { name: 'Tano', value: 100, symbolSize: 9 },
+              { name: 'Gnau', value: 100, symbolSize: 9 },
+              { name: 'Curt', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 13
+          },
+          {
+            name: 'Mers', children: [
+              { name: 'Mesh', value: 100, symbolSize: 10 },
+              { name: 'Lime', value: 100, symbolSize: 13 },
+              { name: 'Nilo', value: 100, symbolSize: 12 },
+              { name: 'Tier', value: 100, symbolSize: 2 },
+              { name: 'Veil', value: 100, symbolSize: 6 },
+              { name: 'Zisk', value: 100, symbolSize: 2 },
+              { name: 'Bava', value: 100, symbolSize: 4 },
+              { name: 'Byle', value: 100, symbolSize: 5 },
+              { name: 'Dush', value: 100, symbolSize: 2 },
+              { name: 'Kiah', value: 100, symbolSize: 4 },
+              { name: 'Kine', value: 100, symbolSize: 10 },
+              { name: 'Guha', value: 100, symbolSize: 5 },
+              { name: 'Husa', value: 100, symbolSize: 12 },
+              { name: 'Kurk', value: 100, symbolSize: 8 },
+              { name: 'Genn', value: 100, symbolSize: 12 }
+            ], value: 100, symbolSize: 12
+          }
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Farb',
+        children: [
+          {
+            name: 'Hayn', children: [
+              { name: 'Hext', value: 100, symbolSize: 11 },
+              { name: 'Hron', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 12
+          },
+          {
+            name: 'Meka', children: [
+              { name: 'Mitz', value: 100, symbolSize: 9 },
+              { name: 'Pach', value: 100, symbolSize: 9 },
+              { name: 'Rawn', value: 100, symbolSize: 11 }
+            ], value: 100, symbolSize: 10
+          },
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Bajo',
+        children: [
+          {
+            name: 'Thoe', children: [
+              { name: 'Tina', value: 100, symbolSize: 10 },
+              { name: 'Bett', value: 100, symbolSize: 5 },
+              { name: 'Depa', value: 100, symbolSize: 10 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Uhle', children: [
+              { name: 'Week', value: 100, symbolSize: 10 },
+              { name: 'Aleo', value: 100, symbolSize: 4 }
+            ], value: 100, symbolSize: 17
+          },
+        ], value: 100, symbolSize: 10
+      },
+      {
+        name: 'Suer',
+        children: [
+          {
+            name: 'Tise', children: [
+              { name: 'Rais', value: 100, symbolSize: 16 },
+              { name: 'Fode', value: 100, symbolSize: 12 },
+              { name: 'Ketz', value: 100, symbolSize: 9 },
+              { name: 'Mare', value: 100, symbolSize: 11 },
+              { name: 'Pase', value: 100, symbolSize: 4 },
+              { name: 'Pule', value: 100, symbolSize: 7 },
+              { name: 'Sana', value: 100, symbolSize: 9 },
+              { name: 'Turo', value: 100, symbolSize: 10 },
+              { name: 'Arbo', value: 100, symbolSize: 10 },
+              { name: 'Rieg', value: 100, symbolSize: 8 }
+            ], value: 100, symbolSize: 11
+          },
+          {
+            name: 'Nimz', children: [
+              { name: 'Zant', value: 100, symbolSize: 11 },
+              { name: 'Deja', value: 100, symbolSize: 9 },
+              { name: 'Heye', value: 100, symbolSize: 15 }
+            ], value: 100, symbolSize: 11
+          }
+        ], value: 100, symbolSize: 10
+      }
+    ]
 
     // 指定图表的配置项和数据
     option = {
@@ -770,11 +773,11 @@
         // 数据结构和树图类似，但是最外层不要求必须是一个对象作为根节点
         data: treemapData,
         upperLabel: {
-            show: true,
+          show: true,
         },
         itemStyle: {
-            borderWidth: 2,
-            borderColorSaturation: 0.5
+          borderWidth: 2,
+          borderColorSaturation: 0.5
         },
         // breadcrumb: {
         //   show: true
